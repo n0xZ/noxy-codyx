@@ -1,5 +1,5 @@
 <script lang="ts">
-import 'uno.css'
 import '@unocss/reset/antfu.css'
+import 'virtual:uno.css'
 </script>
 <slot/>
