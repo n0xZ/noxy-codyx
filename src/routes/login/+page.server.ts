@@ -12,8 +12,10 @@ const loginSchema = z.object({
 })
 export const actions: Actions = {
 	loginUser: async ({ request }) => {
-		const formData = loginSchema.safeParse(await request.formData())
-
+		const requestedFormData = Object.fromEntries(
+			await request.formData()
+		) as z.infer<typeof loginSchema>
+		const formData = loginSchema.safeParse(requestedFormData)
 		if (formData.success) {
 			const existingUser = await prisma.user.findUnique({
 				where: { email: formData.data.email },
@@ -30,6 +32,7 @@ export const actions: Actions = {
 			formData.error.formErrors.fieldErrors.email ||
 				formData.error.formErrors.fieldErrors.password
 		)
+
 		return fail(400, {
 			containsErrors,
 			fields: {
