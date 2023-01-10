@@ -2,11 +2,13 @@ import { fail, redirect } from '@sveltejs/kit'
 import { z } from 'zod'
 import bcryptjs from 'bcryptjs'
 import type { Actions } from './$types'
-import { prisma } from 'src/utils/prisma'
+import { prisma } from '../../utils/prisma'
 
 const loginSchema = z.object({
-	email: z.string().email({ message: 'Email ingresado no valido' }),
-	password: z.string().min(5, { message: 'Campo requerido' }),
+	email: z
+		.string({ required_error: 'Campo requerido' })
+		.email({ message: 'Email ingresado no valido' }),
+	password: z.string({ required_error: 'Campo requerido' }),
 })
 export const actions: Actions = {
 	loginUser: async ({ request }) => {
@@ -24,6 +26,16 @@ export const actions: Actions = {
 			if (!passwordMatches) return
 			return redirect(301, '/home')
 		}
-		return fail(400, { formErrors: formData.error })
+		const containsErrors = Boolean(
+			formData.error.formErrors.fieldErrors.email ||
+				formData.error.formErrors.fieldErrors.password
+		)
+		return fail(400, {
+			containsErrors,
+			fields: {
+				email: formData.error.formErrors.fieldErrors.email?.[0],
+				password: formData.error.formErrors.fieldErrors.password?.[0],
+			},
+		})
 	},
 }
