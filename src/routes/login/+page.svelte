@@ -2,7 +2,10 @@
 	import { enhance } from '$app/forms'
 	import type { ActionData } from './$types'
 	export let form: ActionData
+	
 </script>
+
+<svelte:head><title>Codyx - Iniciar sesión</title></svelte:head>
 
 <main class="h-screen grid place-items-center">
 	<form action="/login?/loginUser" use:enhance method="post" class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-1">
