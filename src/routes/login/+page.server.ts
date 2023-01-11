@@ -11,7 +11,7 @@ const loginSchema = z.object({
 	password: z.string({ required_error: 'Campo requerido' }),
 })
 export const actions: Actions = {
-	loginUser: async ({ request }) => {
+	loginUser: async ({ request, cookies }) => {
 		const requestedFormData = Object.fromEntries(
 			await request.formData()
 		) as z.infer<typeof loginSchema>
@@ -26,6 +26,14 @@ export const actions: Actions = {
 				existingUser.password
 			)
 			if (!passwordMatches) return
+
+			cookies.set('user-session', existingUser.id, {
+				path: '/',
+				maxAge: 60 * 60 * 24,
+				httpOnly: true,
+				sameSite: 'strict',
+				secure: true,
+			})
 			return redirect(301, '/home')
 		}
 		const containsErrors = Boolean(
