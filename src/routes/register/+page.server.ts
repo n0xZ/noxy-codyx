@@ -3,7 +3,7 @@ import { z } from 'zod'
 import bcryptjs from 'bcryptjs'
 import type { Actions } from './$types'
 
-import { prisma } from '../lib/server/prisma'
+import { prisma } from '../../lib/server/prisma'
 
 const registerSchema = z.object({
 	username: z.string({ required_error: 'Campo requerido' }),
