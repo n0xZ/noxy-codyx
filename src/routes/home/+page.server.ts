@@ -1,13 +1,18 @@
-import { redirect, type ServerLoad } from '@sveltejs/kit'
+import { json, redirect, type ServerLoad } from '@sveltejs/kit'
+import { prisma } from '../lib/server/prisma'
 import type { Actions } from './$types'
 
 export const load: ServerLoad = async ({ cookies }) => {
 	const loggedUser = cookies.get('user-session')
-	if (!loggedUser) return redirect(302, '/')
+	if (!loggedUser) throw redirect(302, '/')
+	const userReccomendations = await prisma.recommendation.findMany({
+		where: { authorId: loggedUser },
+	})
+	return json(userReccomendations)
 }
 export const actions: Actions = {
 	logout: async ({ cookies }) => {
 		cookies.delete('user-session')
-		return redirect(302, '/')
+		throw redirect(302, '/')
 	},
 }

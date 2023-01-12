@@ -3,7 +3,7 @@ import { z } from 'zod'
 import bcryptjs from 'bcryptjs'
 import type { Actions } from './$types'
 
-import { prisma } from '../../utils/prisma'
+import { prisma } from '../lib/server/prisma'
 
 const registerSchema = z.object({
 	username: z.string({ required_error: 'Campo requerido' }),
@@ -31,7 +31,7 @@ export const actions: Actions = {
 					username: formData.data.username,
 				},
 			})
-
+			console.log(createdUser)
 			cookies.set('user-session', createdUser.id, {
 				path: '/',
 				maxAge: 60 * 60 * 24,
@@ -39,7 +39,7 @@ export const actions: Actions = {
 				sameSite: 'strict',
 				secure: true,
 			})
-			return redirect(301, '/home')
+			return redirect(302, '/home')
 		}
 		const containsErrors = Boolean(
 			formData.error.formErrors.fieldErrors.username ||

@@ -1,8 +1,8 @@
-import { fail, redirect } from '@sveltejs/kit'
+import { fail, redirect, type ServerLoad } from '@sveltejs/kit'
 import { z } from 'zod'
 import bcryptjs from 'bcryptjs'
 import type { Actions } from './$types'
-import { prisma } from '../../utils/prisma'
+import { prisma } from '../lib/server/prisma'
 
 const loginSchema = z.object({
 	email: z
@@ -10,6 +10,11 @@ const loginSchema = z.object({
 		.email({ message: 'Email ingresado no valido' }),
 	password: z.string({ required_error: 'Campo requerido' }),
 })
+
+export const load: ServerLoad = async ({ cookies }) => {
+	const existingUser = cookies.get('user-session')
+	if (existingUser) throw redirect(302, '/home')
+}
 export const actions: Actions = {
 	loginUser: async ({ request, cookies }) => {
 		const requestedFormData = Object.fromEntries(
