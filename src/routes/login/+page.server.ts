@@ -11,9 +11,9 @@ const loginSchema = z.object({
 	password: z.string({ required_error: 'Campo requerido' }),
 })
 
-export const load: ServerLoad = async ({ cookies }) => {
-	const existingUser = cookies.get('user-session')
-	if (existingUser) throw redirect(302, '/home')
+export const load: ServerLoad = async ({ locals }) => {
+	console.log(locals.userId)
+	if (locals.userId) throw redirect(302, '/home')
 }
 export const actions: Actions = {
 	loginUser: async ({ request, cookies }) => {
@@ -27,7 +27,7 @@ export const actions: Actions = {
 			})
 			if (!existingUser) return
 			const passwordMatches = await bcryptjs.compare(
-				formData.data.email,
+				formData.data.password,
 				existingUser.password
 			)
 			if (!passwordMatches) return
@@ -39,7 +39,7 @@ export const actions: Actions = {
 				sameSite: 'strict',
 				secure: true,
 			})
-			return redirect(301, '/home')
+			throw redirect(301, '/home')
 		}
 		const containsErrors = Boolean(
 			formData.error.formErrors.fieldErrors.email ||
