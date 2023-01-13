@@ -6,11 +6,15 @@ import type { Actions } from './$types'
 import { prisma } from '../../lib/server/prisma'
 
 const registerSchema = z.object({
-	username: z.string({ required_error: 'Campo requerido' }),
+	username: z
+		.string({ required_error: 'Campo requerido' })
+		.min(3, { message: 'Campo requerido' }),
 	email: z
 		.string({ required_error: 'Campo requerido' })
 		.email({ message: 'Email ingresado no valido' }),
-	password: z.string({ required_error: 'Campo requerido' }),
+	password: z
+		.string({ required_error: 'Campo requerido' })
+		.min(5, { message: 'Campo requerido' }),
 })
 export const actions: Actions = {
 	registerUser: async ({ request, cookies }) => {
@@ -22,7 +26,16 @@ export const actions: Actions = {
 			const existingUser = await prisma.user.findUnique({
 				where: { email: formData.data.email },
 			})
-			if (existingUser) return
+			if (existingUser)
+				return fail(400, {
+					containsErrors: true,
+					fields: {
+						username: undefined,
+						email: undefined,
+						password: undefined,
+					},
+					externalErrors: 'Este usuario ya existe.',
+				})
 			const hashedPassword = await bcryptjs.hash(formData.data.password, 10)
 			const createdUser = await prisma.user.create({
 				data: {
@@ -31,7 +44,7 @@ export const actions: Actions = {
 					username: formData.data.username,
 				},
 			})
-			console.log(createdUser)
+
 			cookies.set('user-session', createdUser.id, {
 				path: '/',
 				maxAge: 60 * 60 * 24,
@@ -54,6 +67,7 @@ export const actions: Actions = {
 				email: formData.error.formErrors.fieldErrors.email?.[0],
 				password: formData.error.formErrors.fieldErrors.password?.[0],
 			},
+			externalErrors: undefined,
 		})
 	},
 }

@@ -8,11 +8,12 @@ const loginSchema = z.object({
 	email: z
 		.string({ required_error: 'Campo requerido' })
 		.email({ message: 'Email ingresado no valido' }),
-	password: z.string({ required_error: 'Campo requerido' }),
+	password: z
+		.string({ required_error: 'Campo requerido' })
+		.min(5, { message: 'Campo requerido' }),
 })
 
 export const load: ServerLoad = async ({ locals }) => {
-	console.log(locals.userId)
 	if (locals.userId) throw redirect(302, '/home')
 }
 export const actions: Actions = {
@@ -20,17 +21,37 @@ export const actions: Actions = {
 		const requestedFormData = Object.fromEntries(
 			await request.formData()
 		) as z.infer<typeof loginSchema>
+
 		const formData = loginSchema.safeParse(requestedFormData)
 		if (formData.success) {
 			const existingUser = await prisma.user.findUnique({
 				where: { email: formData.data.email },
 			})
-			if (!existingUser) return
+			if (!existingUser)
+				return fail(400, {
+					containsErrors: true,
+					fields: {
+						email: undefined,
+						password: undefined,
+					},
+					externalErrors:
+						'Este usuario no existe o las credenciales ingresadas son incorrectas.',
+				})
+
 			const passwordMatches = await bcryptjs.compare(
 				formData.data.password,
 				existingUser.password
 			)
-			if (!passwordMatches) return
+			if (!passwordMatches)
+				return fail(400, {
+					containsErrors: true,
+					fields: {
+						email: undefined,
+						password: undefined,
+					},
+					externalErrors:
+						'Este usuario no existe o las credenciales ingresadas son incorrectas.',
+				})
 
 			cookies.set('user-session', existingUser.id, {
 				path: '/',
@@ -52,6 +73,7 @@ export const actions: Actions = {
 				email: formData.error.formErrors.fieldErrors.email?.[0],
 				password: formData.error.formErrors.fieldErrors.password?.[0],
 			},
+			externalErrors: undefined,
 		})
 	},
 }
