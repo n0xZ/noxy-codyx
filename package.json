@@ -11,6 +11,7 @@
 		"lint": "eslint ."
 	},
 	"devDependencies": {
+		"@rgossiaux/svelte-headlessui": "^1.0.2",
 		"@sveltejs/adapter-auto": "^1.0.0",
 		"@sveltejs/kit": "^1.0.0",
 		"@types/bcryptjs": "^2.4.2",
@@ -29,6 +30,7 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^4.8.0",
+		"@vite-pwa/sveltekit": "^0.1.2",
 		"bcryptjs": "^2.4.3",
 		"domain-functions": "^1.5.1",
 		"prisma": "^4.8.0",
