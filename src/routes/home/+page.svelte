@@ -12,7 +12,7 @@ export let data :PageServerData
 </svelte:head>
 
 <h2 class="mt-6 text-center font-bold text-2xl font-mukta">Mi lista actual de recomendaciones</h2>
-<section class="h-full   grid xl:grid-cols-6 grid-cols-1 grid-rows-2  mt-4 font-mukta">
+<section class="h-full container mx-auto max-w-3xl   grid xl:grid-cols-6 grid-cols-1 grid-rows-2  place-items-center mt-4 font-mukta">
 {#if data.reccos.length!==0}
 	<RecommendationList props={{reccos:data.reccos}}/>
 	{:else }
