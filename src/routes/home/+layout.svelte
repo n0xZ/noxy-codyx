@@ -1,7 +1,8 @@
 <script lang="ts">
-import {enhance} from "$app/forms"
+	import { enhance } from '$app/forms'
+	import MobileMenu from "$lib/components/menu/mobile.svelte"
+</script>
 
-</script>  
 <header class="p-4 border-b-2 border-rose-200">
 	<nav
 		class="flex flex-row items-center justify-between container mx-auto max-w-3xl xl:text-lg text-base font-normal font-commissioner "
@@ -10,11 +11,16 @@ import {enhance} from "$app/forms"
 			<a href="/home" class="no-underline c-rose-500  font-semibold"> Codyx </a>
 		</h1>
 		<ul class="xl:flex hidden flex-row items-center space-x-4  ">
-      <a href="/home/recommendations/create">Crear nueva recomendación</a>
-			<form method="post" use:enhance  action="/home?/logout">
-				<button type="submit" class="p-3 rounded-lg bg-rose-500 c-gray-50 font-semibold ">Cerrar sesión</button>
+			<a href="/home/recommendations/create">Crear nueva recomendación</a>
+			<form method="post" use:enhance action="/home?/logout">
+				<button
+					type="submit"
+					class="p-3 rounded-lg bg-rose-500 c-gray-50 font-semibold "
+					>Cerrar sesión</button
+				>
 			</form>
 		</ul>
+		<MobileMenu />
 	</nav>
 </header>
-<slot/>
+<slot />
