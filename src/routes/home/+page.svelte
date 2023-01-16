@@ -1,7 +1,7 @@
 <script lang="ts">
  import type { PageData, PageServerData } from "./$types"
 import {enhance} from '$app/forms'
-import RecommendationList from "$lib/components/recommendation-list.svelte";
+import RecommendationList from "$lib/components/recommendation/recommendation-list.svelte";
 
 
 export let data :PageServerData
