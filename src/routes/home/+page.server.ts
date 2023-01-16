@@ -14,4 +14,13 @@ export const actions: Actions = {
 		cookies.delete('user-session')
 		throw redirect(302, '/')
 	},
+	'delete-recommendation': async ({ request, url }) => {
+		const formData = await request.formData()
+		const recommId = formData.get('id')
+
+		await prisma.recommendation.delete({
+			where: { id: recommId },
+		})
+		throw redirect(302, '/home')
+	},
 }
