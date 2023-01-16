@@ -27,12 +27,18 @@ model Recommendation {
   imgSrc    String?
   createdAt DateTime @default(now())
   gender    Gender
+  status Status @default(IN_PROGRESS)
   author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  rating Int?
   authorId  String   @unique
 }
 
+enum Status{
+  IN_PROGRESS
+  FINISHED
+}
 enum Gender {
-  MOVIE
+  FILM
   SERIE
   ANIME
   MANGA
