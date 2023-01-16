@@ -1,3 +1,8 @@
+
+<script lang="ts">
+import MobileLandingMenu from '$lib/components/menu/landing.svelte'
+
+</script>
 <svelte:head>
 	<title>Bienvenid@ a Codyx!</title>
 </svelte:head>
@@ -30,6 +35,7 @@
 				</a>
 			</li>
 		</ul>
+		<MobileLandingMenu/>
 	</nav>
 </header>
 <section
