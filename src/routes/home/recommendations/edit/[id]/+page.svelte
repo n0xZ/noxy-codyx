@@ -17,7 +17,7 @@
 		action={`/home/recommendations/edit/${data.form.id}?/edit-recommendation`}
 		use:enhance
 		method="post"
-		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-1"
+		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-2"
 	>
 	<h2 class="text-center text-3xl">Editar recomendación</h2>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
