@@ -6,7 +6,7 @@
 
 <svelte:head><title>Codyx - Iniciar sesión</title></svelte:head>
 
-<main class="h-screen grid place-items-center font-mukta">
+<section class="h-screen grid place-items-center font-mukta">
 	<form
 		action="/login?/loginUser"
 		use:enhance
@@ -56,4 +56,4 @@
 			</span>
 			<a href="/register" class="text-center underline">No tengo una cuenta</a>
 	</form>
-</main>
+</section>

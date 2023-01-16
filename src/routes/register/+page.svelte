@@ -6,7 +6,7 @@
 
 <svelte:head><title>Codyx - Crear nueva cuenta</title></svelte:head>
 
-<main class="h-screen grid place-items-center font-mukta">
+<section class="h-screen grid place-items-center font-mukta">
 	<form
 		action="/register?/registerUser"
 		use:enhance
@@ -70,4 +70,4 @@
 			</span>
 		<a href="/login" class="text-center underline">Ya tengo una cuenta</a>
 	</form>
-</main>
+</section>
