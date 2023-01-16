@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
-	import MobileMenu from "$lib/components/menu/mobile.svelte"
+	import MobileHomeMenu from "$lib/components/menu/home.svelte"
 </script>
 
 <header class="p-4 border-b-2 border-rose-200">
@@ -20,7 +20,7 @@
 				>
 			</form>
 		</ul>
-		<MobileMenu />
+		<MobileHomeMenu />
 	</nav>
 </header>
 <slot />
