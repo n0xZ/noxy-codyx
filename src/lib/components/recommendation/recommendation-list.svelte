@@ -10,25 +10,29 @@
 	export let props: RecommendationListProps
 </script>
 
-{#each props.reccos as { name, genre, note, imgSrc, id }}
+{#each props.reccos as { name, genre, note, imgSrc, rating,id }}
 	<article
-		class="flex flex-col justify-center items-center rounded-md   space-y-3 border-2 border-rose-200 p-2 text-center h-auto w-72"
+		class="flex flex-col justify-center items-center rounded-md    shadow-md bg-light-50  text-center h-auto w-72"
 	>
-		<h2 class="font-semibold text-xl">{name}</h2>
+	
 		<img
 			src={imgSrc}
-			width="150"
-			height="150"
-			class="rounded-lg aspect-a"
+			width="288"
+			height="200"
+			class="rounded-sm aspect-a"
 			alt={`Imagen de ${name}`}
 		/>
-		<p class=" w-full">{genre}</p>
-		<p class="font-light text-xs c-gray-500">{note}</p>
+		<p class=" w-full text-lg bg-amber-400 c-light  font-medium">{genre}</p>
+			<h2 class="font-semibold text-xl mb-3">{name}</h2>
+		<p class=" text-md  c-gray-400">"{note}"</p>
+		{#if rating}
+			<p class="text-xs c-gray-400">{rating}/10</p>
+		{/if}
 		<aside
-			class="flex flex-row items-center space-x-5 justify-center pb-4 h-full w-full"
+			class="flex flex-row items-center space-x-5 justify-center pb-4 h-full w-full mt-10"
 		>
 			<a title="Editar recomendación" href={`/home/recommendations/edit/${id}`}
-				><Edit iconClass="h-7 w-7" /></a
+				><Edit iconClass="h-6 w-6 hover:c-rose-400 duration-100 ease-in-out" /></a
 			>
 			<form
 			use:enhance
@@ -38,7 +42,7 @@
 				method="post"
 			>
 			<input type="hidden" name="id" value={id}>
-				<button  type="submit"><Delete iconClass="h-7 w-7" /></button>
+				<button  type="submit" title="Eliminar recomendación"><Delete iconClass="h-6 w-6 hover:c-rose-400 duration-100 ease-in-out" /></button>
 			</form>
 		</aside>
 	</article>
