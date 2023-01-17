@@ -23,4 +23,4 @@
 		<MobileHomeMenu />
 	</nav>
 </header>
-<slot />
+<div class="h-full mt-4"><slot /></div>
