@@ -3,7 +3,7 @@
 	import MobileHomeMenu from "$lib/components/menu/home.svelte"
 </script>
 
-<header class="p-4 border-b-2 border-rose-200">
+<header class="p-4 ">
 	<nav
 		class="flex flex-row items-center justify-between container mx-auto max-w-4xl xl:text-lg text-base font-normal font-commissioner "
 	>
