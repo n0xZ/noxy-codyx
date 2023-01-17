@@ -1,18 +1,19 @@
 <script lang="ts">
-	import { Genre } from '@prisma/client'
+	import { Genre, Status } from '@prisma/client'
 	import { enhance } from '$app/forms'
 	
 	import type { ActionData, PageServerData } from './$types'
-	import type { ServerData } from '@sveltejs/kit/types/internal'
+
 
 	const actualGenres = Object.keys(Genre)
+	const actualStatus = Object.keys(Status)
 	export let form: ActionData
 	export let data: PageServerData
 </script>
 
 <svelte:head><title>Codyx - Crear nueva recomendación</title></svelte:head>
 
-<section class="h-screen grid place-items-center font-mukta">
+<section class="min-h-screen h-full grid place-items-center font-mukta">
 	<form
 		action={`/home/recommendations/edit/${data.form.id}?/edit-recommendation`}
 		use:enhance
@@ -51,7 +52,22 @@
 			>
 		</aside>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<label for="" class="font-semibold">Género de la recomendación</label>
+			<label for="name" class="font-semibold">Puntaje de la recomendación (del 1 al 10)</label>
+			<input
+				type="number"
+				name="rating"
+				value={data.form?.rating}
+				placeholder="Por ej. 6"
+				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+			/>
+			<span class="h-5 c-red-500"
+				>{#if form?.containsErrors && form?.fields?.rating}
+					<p>{form?.fields?.rating}</p>
+				{/if}</span
+			>
+		</aside>
+		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+			<label for="genre" class="font-semibold">Género de la recomendación</label>
 			<select
 				name="genre"
 					value={data.form?.genre}
@@ -68,6 +84,25 @@
 					<p>{form?.fields?.genre}</p>
 				{/if}</span
 			>
+				<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+			<label for="name" class="font-semibold">Estado actual de la recomendación </label>
+		<select
+				name="genre"
+					value={data.form?.status}
+				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+			>
+				{#each actualStatus as status}
+					<option value={status}>
+						{status}
+					</option>
+				{/each}
+			</select>
+			<span class="h-5 c-red-500"
+				>{#if form?.containsErrors && form?.fields?.status}
+					<p>{form?.fields?.status}</p>
+				{/if}</span
+			>
+		</aside>
 			<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
 				<label for="password" class="font-semibold"
 					>Imagen/Preview de la recomendación (Preferiblemente URL)</label

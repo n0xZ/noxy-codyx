@@ -7,6 +7,8 @@ const editRecommendationSchema = z.object({
 	note: z.string(),
 	imgSrc: z.string().url(),
 	genre: z.enum(['FILM', 'SERIE', 'ANIME', 'MANGA', 'NOVEL', 'OTHER']),
+	status: z.enum(['IN_PROGRESS', 'FINISHED']),
+	rating: z.number().optional(),
 })
 export const load: ServerLoad = async ({ params }) => {
 	const existingRecommendation = await prisma.recommendation.findUnique({
@@ -45,6 +47,8 @@ export const actions: Actions = {
 					note: formData.error.formErrors.fieldErrors.note?.[0],
 					imgSrc: formData.error.formErrors.fieldErrors.imgSrc?.[0],
 					genre: formData.error.formErrors.fieldErrors.genre?.[0],
+					status: formData.error.formErrors.fieldErrors.status?.[0],
+					rating: formData.error.formErrors.fieldErrors.rating?.[0],
 				},
 				externalErrors: undefined,
 			})
