@@ -4,13 +4,13 @@
 
 	import type { ActionData, PageServerData } from './$types'
 
-	const actualGenres = ['ANIME', 'FILM ', 'MANGA ', 'NOVEL ', 'OTHER ', 'SERIE']
-	const actualStatus = ['IN_PROGRESS', 'FINISHED']
+	const actualGenres =Object.keys(Genre)
+	const actualStatus = Object.keys(Status)
 	export let form: ActionData
 	export let data: PageServerData
 </script>
 
-<svelte:head><title>Codyx - Crear nueva recomendación</title></svelte:head>
+<svelte:head><title>Codyx - Editar recomendación existente</title></svelte:head>
 
 <section class="min-h-screen h-full grid place-items-center font-mukta">
 	<form
@@ -54,8 +54,8 @@
 			<label for="genre" class="font-semibold">Género de la recomendación</label>
 			<select
 				name="genre"
-				value={data.form?.genre}
-				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+				value={"MANGA"}
+				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200  c-gray-800 max-w-2xl"
 			>
 				{#each actualGenres as genre}
 					<option value={genre}>
@@ -89,11 +89,11 @@
 
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
 			<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-				<label for="name" class="font-semibold"
+				<label for="status" class="font-semibold"
 					>Estado actual de la recomendación
 				</label>
 				<select
-					name="genre"
+					name="status"
 					value={data.form?.status}
 					class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
 				>

@@ -8,12 +8,13 @@ const editRecommendationSchema = z.object({
 	imgSrc: z.string().url(),
 	genre: z.enum(['FILM', 'SERIE', 'ANIME', 'MANGA', 'NOVEL', 'OTHER']),
 	status: z.enum(['IN_PROGRESS', 'FINISHED']),
-	rating: z.number().optional(),
+	rating: z.string().optional(),
 })
 export const load: ServerLoad = async ({ params }) => {
 	const existingRecommendation = await prisma.recommendation.findUnique({
 		where: { id: params.id },
 	})
+	console.log(existingRecommendation)
 	if (!existingRecommendation) throw redirect(302, '/home')
 	return { form: existingRecommendation }
 }
@@ -22,6 +23,7 @@ export const actions: Actions = {
 		const requestFormData = Object.fromEntries(
 			await request.formData()
 		) as z.infer<typeof editRecommendationSchema>
+
 		const formData = editRecommendationSchema.safeParse(requestFormData)
 
 		if (formData.success) {
@@ -31,6 +33,8 @@ export const actions: Actions = {
 					note: formData.data.note,
 					genre: formData.data.genre,
 					imgSrc: formData.data.imgSrc,
+					status: formData.data.status,
+					rating: formData.data.rating ? parseInt(formData.data.rating) : null,
 				},
 				where: { id: params.id },
 			})
@@ -38,7 +42,11 @@ export const actions: Actions = {
 		} else {
 			const containsErrors = Boolean(
 				formData.error.formErrors.fieldErrors.name ||
-					formData.error.formErrors.fieldErrors.note
+					formData.error.formErrors.fieldErrors.note ||
+					formData.error.formErrors.fieldErrors.imgSrc ||
+					formData.error.formErrors.fieldErrors.genre ||
+					formData.error.formErrors.fieldErrors.status ||
+					formData.error.formErrors.fieldErrors.rating
 			)
 			return fail(400, {
 				containsErrors,
