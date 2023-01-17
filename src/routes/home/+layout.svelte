@@ -5,7 +5,7 @@
 
 <header class="p-4 border-b-2 border-rose-200">
 	<nav
-		class="flex flex-row items-center justify-between container mx-auto max-w-3xl xl:text-lg text-base font-normal font-commissioner "
+		class="flex flex-row items-center justify-between container mx-auto max-w-4xl xl:text-lg text-base font-normal font-commissioner "
 	>
 		<h1>
 			<a href="/home" class="no-underline c-rose-500  font-semibold"> Codyx </a>
