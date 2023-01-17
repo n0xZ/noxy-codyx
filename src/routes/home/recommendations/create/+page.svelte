@@ -22,7 +22,7 @@
 				type="text"
 				name="name"
 				placeholder="'The Lord of the Rings: The Two Towers'"
-				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			/>
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.fields?.name}
@@ -36,7 +36,7 @@
 				type="text"
 				name="note"
 				placeholder="'Está muy bien este ejemplo. Pero lo miraré más adelante...'"
-				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			/>
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.fields?.note}
@@ -48,7 +48,7 @@
 			<label for="" class="font-semibold">Género de la recomendación</label>
 			<select
 				name="genre"
-				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			>
 				{#each actualGenres as genre}
 					<option value={genre}>
@@ -70,7 +70,7 @@
 					type="text"
 					name="imgSrc"
 					placeholder="https://janedoereccomendationimage.jpeg"
-					class="px-4 py-3 rounded-lg outline-none  border-2 border-rose-200 c-gray-800 max-w-2xl"
+					class="px-4 py-3 rounded-lg outline-none  bg-light-300 c-gray-800 max-w-2xl"
 				/>
 				<span class="h-5 c-red-500"
 					>{#if form?.containsErrors && form?.fields?.imgSrc}

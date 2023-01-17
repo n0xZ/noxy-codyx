@@ -13,13 +13,14 @@
 		method="post"
 		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-1"
 	>
+	<h2 class=" text-3xl text-center font-semibold">Inicia sesión en Codyx!</h2>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
 			<label for="email" class="font-semibold">Correo electrónico</label>
 			<input
 				type="email"
 				name="email"
 								placeholder="janedoe@email.net"
-				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			/>
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.fields?.email}
@@ -34,7 +35,7 @@
 				type="password"
 				name="password"
 					placeholder="janepassword"
-				class="px-4 py-3 rounded-lg outline-none  border-2 border-rose-200 c-gray-800 max-w-2xl"
+				class="px-4 py-3 rounded-lg outline-none  bg-light-300 c-gray-800 max-w-2xl"
 			/>
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.fields?.password}

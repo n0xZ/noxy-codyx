@@ -27,7 +27,7 @@
 				name="name"
 				value={data.form?.name}
 				placeholder="'The Lord of the Rings: The Two Towers'"
-				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			/>
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.fields?.name}
@@ -42,7 +42,7 @@
 				name="note"
 				value={data.form?.note}
 				placeholder="'Está muy bien este ejemplo. Pero lo miraré más adelante...'"
-				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			/>
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.fields?.note}
@@ -55,7 +55,7 @@
 			<select
 				name="genre"
 				value={"MANGA"}
-				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200  c-gray-800 max-w-2xl"
+				class="px-4 py-3 rounded-lg outline-none bg-light-300  c-gray-800 max-w-2xl font-semibold"
 			>
 				{#each actualGenres as genre}
 					<option value={genre}>
@@ -78,7 +78,7 @@
 				name="rating"
 				value={data.form?.rating && ''}
 				placeholder="Por ej. 6"
-				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			/>
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.fields?.rating}
@@ -95,7 +95,7 @@
 				<select
 					name="status"
 					value={data.form?.status}
-					class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+					class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 				>
 					{#each actualStatus as status}
 						<option value={status}>
@@ -123,7 +123,7 @@
 					name="imgSrc"
 					value={data.form?.imgSrc}
 					placeholder="https://janedoereccomendationimage.jpeg"
-					class="px-4 py-3 rounded-lg outline-none  border-2 border-rose-200 c-gray-800 max-w-2xl"
+					class="px-4 py-3 rounded-lg outline-none  bg-light-300 c-gray-800 max-w-2xl"
 				/>
 				<span class="h-5 c-red-500"
 					>{#if form?.containsErrors && form?.fields?.imgSrc}
