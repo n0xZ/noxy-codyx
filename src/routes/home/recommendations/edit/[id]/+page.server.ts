@@ -14,7 +14,7 @@ export const load: ServerLoad = async ({ params }) => {
 	const existingRecommendation = await prisma.recommendation.findUnique({
 		where: { id: params.id },
 	})
-	console.log(existingRecommendation)
+
 	if (!existingRecommendation) throw redirect(302, '/home')
 	return { form: existingRecommendation }
 }
