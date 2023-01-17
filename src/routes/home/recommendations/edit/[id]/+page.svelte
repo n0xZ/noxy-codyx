@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { Genre, Status } from '@prisma/client'
 	import { enhance } from '$app/forms'
-	
+
 	import type { ActionData, PageServerData } from './$types'
 
-
-	const actualGenres = Object.keys(Genre)
-	const actualStatus = Object.keys(Status)
+	const actualGenres = ['ANIME', 'FILM ', 'MANGA ', 'NOVEL ', 'OTHER ', 'SERIE']
+	const actualStatus = ['IN_PROGRESS', 'FINISHED']
 	export let form: ActionData
 	export let data: PageServerData
 </script>
@@ -20,7 +19,7 @@
 		method="post"
 		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-2"
 	>
-	<h2 class="text-center text-3xl">Editar recomendación</h2>
+		<h2 class="text-center text-3xl">Editar recomendación</h2>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
 			<label for="name" class="font-semibold">Nombre de la recomendación</label>
 			<input
@@ -52,25 +51,10 @@
 			>
 		</aside>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<label for="name" class="font-semibold">Puntaje de la recomendación (del 1 al 10)</label>
-			<input
-				type="number"
-				name="rating"
-				value={data.form?.rating}
-				placeholder="Por ej. 6"
-				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
-			/>
-			<span class="h-5 c-red-500"
-				>{#if form?.containsErrors && form?.fields?.rating}
-					<p>{form?.fields?.rating}</p>
-				{/if}</span
-			>
-		</aside>
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
 			<label for="genre" class="font-semibold">Género de la recomendación</label>
 			<select
 				name="genre"
-					value={data.form?.genre}
+				value={data.form?.genre}
 				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
 			>
 				{#each actualGenres as genre}
@@ -84,26 +68,52 @@
 					<p>{form?.fields?.genre}</p>
 				{/if}</span
 			>
-				<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<label for="name" class="font-semibold">Estado actual de la recomendación </label>
-		<select
-				name="genre"
-					value={data.form?.status}
-				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+		</aside>
+		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+			<label for="rating" class="font-semibold"
+				>Puntaje de la recomendación (del 1 al 10)</label
 			>
-				{#each actualStatus as status}
-					<option value={status}>
-						{status}
-					</option>
-				{/each}
-			</select>
+			<input
+				type="number"
+				name="rating"
+				value={data.form?.rating && ''}
+				placeholder="Por ej. 6"
+				class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+			/>
 			<span class="h-5 c-red-500"
-				>{#if form?.containsErrors && form?.fields?.status}
-					<p>{form?.fields?.status}</p>
+				>{#if form?.containsErrors && form?.fields?.rating}
+					<p>{form?.fields?.rating}</p>
 				{/if}</span
 			>
 		</aside>
+
+		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
 			<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+				<label for="name" class="font-semibold"
+					>Estado actual de la recomendación
+				</label>
+				<select
+					name="genre"
+					value={data.form?.status}
+					class="px-4 py-3 rounded-lg outline-none border-2 border-rose-200 c-gray-800 max-w-2xl"
+				>
+					{#each actualStatus as status}
+						<option value={status}>
+							{status}
+						</option>
+					{/each}
+				</select>
+				<span class="h-5 c-red-500"
+					>{#if form?.containsErrors && form?.fields?.status}
+						<p>{form?.fields?.status}</p>
+					{/if}</span
+				>
+			</aside>
+			
+		
+			
+		</aside>
+		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
 				<label for="password" class="font-semibold"
 					>Imagen/Preview de la recomendación (Preferiblemente URL)</label
 				>
@@ -121,7 +131,7 @@
 					{/if}
 				</span>
 			</aside>
-			<button
+				<button
 				type="submit"
 				class="px-5 py-3 rounded-lg  bg-rose-500 c-gray-50 font-semibold w-full max-w-2xl"
 				>Editar recomendación</button
@@ -131,6 +141,5 @@
 					<p>{form?.externalErrors}</p>
 				{/if}
 			</span>
-		</aside>
 	</form>
 </section>
