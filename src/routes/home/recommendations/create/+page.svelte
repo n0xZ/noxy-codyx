@@ -45,7 +45,7 @@
 			>
 		</aside>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<label for="" class="font-semibold">Género de la recomendación</label>
+			<label for="genre" class="font-semibold">Género de la recomendación</label>
 			<select
 				name="genre"
 				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
@@ -62,7 +62,7 @@
 				{/if}</span
 			>
 			<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-				<label for="password" class="font-semibold"
+				<label for="imgSrc" class="font-semibold"
 					>Imagen/Preview de la recomendación (Preferiblemente URL)</label
 				>
 
