@@ -38,7 +38,7 @@ enum Status{
   FINISHED
 }
 enum Genre {
-  FILM
+  MOVIE
   SERIE
   ANIME
   MANGA
