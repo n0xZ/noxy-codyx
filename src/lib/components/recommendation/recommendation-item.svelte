@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Genre, Recommendation } from '@prisma/client'
+	import type { Recommendation } from '@prisma/client'
 	import { enhance } from '$app/forms'
 	import Edit from '../icons/edit.svelte'
 	import Delete from '../icons/delete.svelte'
@@ -14,7 +14,7 @@
 			case 'ANIME':
 				return 'bg-sky-400'
 				break
-			case 'FILM':
+			case 'MOVIE':
 				return 'bg-emerald-400'
 				break
 			case 'NOVEL':
@@ -33,7 +33,7 @@
 export let recommendation :Recommendation
 
 const genreBgColor = handleGenreBackgroundColor(recommendation.genre)
-console.log(genreBgColor)
+
 </script>
 
 <article
