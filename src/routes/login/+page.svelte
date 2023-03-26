@@ -65,7 +65,7 @@ await update()
 			{#if loading}
 
 					<Spinner/>
-				<span>Iniciando...</span>
+				<span>Cargando...</span>
 				{:else}
 				Iniciar sesión
 			{/if}
