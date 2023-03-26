@@ -60,7 +60,7 @@ await update()
 		<button
 			type="submit"
 			disabled={loading}
-			class="px-5 py-3 rounded-lg  flex flex-row items-center justify-center space-x-5 bg-rose-500 c-gray-50 font-semibold w-full max-w-2xl"
+			class="px-5 py-3 rounded-lg  flex flex-row items-center justify-center space-x-2 bg-rose-500 c-gray-50 font-semibold w-full max-w-2xl"
 			>
 			{#if loading}
 
