@@ -52,7 +52,7 @@ export const actions: Actions = {
 				sameSite: 'strict',
 				secure: true,
 			})
-			return redirect(302, '/home')
+			throw redirect(302, '/home')
 		}
 		const containsErrors = Boolean(
 			formData.error.formErrors.fieldErrors.username ||
