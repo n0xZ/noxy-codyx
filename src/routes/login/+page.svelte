@@ -1,7 +1,18 @@
 <script lang="ts">
-	import { enhance } from '$app/forms'
+	import { enhance, type SubmitFunction } from '$app/forms'
+ import Spinner from '$lib/components/icons/spinner.svelte'
 	import type { ActionData } from './$types'
 	export let form: ActionData
+	
+	let loading = false
+const loginUser:SubmitFunction = ()=>{
+	loading=true
+	return async({update})=>{
+		
+		loading=false
+await update()
+	}
+}
 </script>
 
 <svelte:head><title>Codyx - Iniciar sesión</title></svelte:head>
@@ -9,7 +20,7 @@
 <section class="h-screen grid place-items-center font-mukta">
 	<form
 		action="/login?/loginUser"
-		use:enhance
+		use:enhance={loginUser}
 		method="post"
 		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-1"
 	>
@@ -19,6 +30,7 @@
 			<input
 				type="email"
 				name="email"
+				disabled={loading}
 								placeholder="janedoe@email.net"
 				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			/>
@@ -34,6 +46,7 @@
 			<input
 				type="password"
 				name="password"
+				disabled={loading}
 					placeholder="janepassword"
 				class="px-4 py-3 rounded-lg outline-none  bg-light-300 c-gray-800 max-w-2xl"
 			/>
@@ -46,9 +59,19 @@
 		</aside>
 		<button
 			type="submit"
-			class="px-5 py-3 rounded-lg  bg-rose-500 c-gray-50 font-semibold w-full max-w-2xl"
-			>Iniciar sesión</button
+			disabled={loading}
+			class="px-5 py-3 rounded-lg  flex flex-row items-center justify-center space-x-5 bg-rose-500 c-gray-50 font-semibold w-full max-w-2xl"
+			>
+			{#if loading}
+
+					<Spinner/>
+				<span>Iniciando...</span>
+				{:else}
+				Iniciar sesión
+			{/if}
+		</button
 		>
+	
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.externalErrors}
 					<p>{form?.externalErrors  }</p>
