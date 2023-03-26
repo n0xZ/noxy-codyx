@@ -6,7 +6,7 @@ const editRecommendationSchema = z.object({
 	name: z.string().min(3, { message: 'Campo requerido' }),
 	note: z.string(),
 	imgSrc: z.string().url(),
-	genre: z.enum(['FILM', 'SERIE', 'ANIME', 'MANGA', 'NOVEL', 'OTHER']),
+	genre: z.enum(['MOVIE', 'SERIE', 'ANIME', 'MANGA', 'NOVEL', 'OTHER']),
 	status: z.enum(['IN_PROGRESS', 'FINISHED']),
 	rating: z.string().optional(),
 })
