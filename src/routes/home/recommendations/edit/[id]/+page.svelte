@@ -1,13 +1,22 @@
 <script lang="ts">
-	import { Genre, Status } from '@prisma/client'
-	import { enhance } from '$app/forms'
+	import { Status } from '@prisma/client'
+	import { enhance, type SubmitFunction } from '$app/forms'
 
 	import type { ActionData, PageServerData } from './$types'
+ import Spinner from '$lib/components/icons/spinner.svelte'
 
-	const actualGenres =Object.keys(Genre)
+	const actualGenres =["MOVIE" , "SERIE" , "ANIME" , "MANGA" , "NOVEL" , "OTHER"]
 	const actualStatus = Object.keys(Status)
 	export let form: ActionData
 	export let data: PageServerData
+		let loading = false
+	const updateRecommendation: SubmitFunction = () => {
+		loading = true
+		return async ({ update }) => {
+			loading = false
+			await update()
+		}
+	}
 </script>
 
 <svelte:head><title>Codyx - Editar recomendación existente</title></svelte:head>
@@ -15,7 +24,7 @@
 <section class="min-h-screen h-full grid place-items-center font-mukta">
 	<form
 		action={`/home/recommendations/edit/${data.form.id}?/edit-recommendation`}
-		use:enhance
+		use:enhance={updateRecommendation}
 		method="post"
 		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-2"
 	>
@@ -26,6 +35,7 @@
 				type="text"
 				name="name"
 				value={data.form?.name}
+				disabled={loading}
 				placeholder="'The Lord of the Rings: The Two Towers'"
 				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			/>
@@ -41,6 +51,7 @@
 				type="text"
 				name="note"
 				value={data.form?.note}
+				disabled={loading}
 				placeholder="'Está muy bien este ejemplo. Pero lo miraré más adelante...'"
 				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			/>
@@ -54,8 +65,9 @@
 			<label for="genre" class="font-semibold">Género de la recomendación</label>
 			<select
 				name="genre"
-				value={"MANGA"}
-				class="px-4 py-3 rounded-lg outline-none bg-light-300  c-gray-800 max-w-2xl font-semibold"
+				value={data.form.genre}
+				disabled={loading}
+				class="px-4 py-3 rounded-lg outline-none bg-light-300  c-gray-800 max-w-2xl "
 			>
 				{#each actualGenres as genre}
 					<option value={genre}>
@@ -77,6 +89,7 @@
 				type="number"
 				name="rating"
 				value={data.form?.rating && ''}
+				disabled={loading}
 				placeholder="Por ej. 6"
 				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			/>
@@ -95,6 +108,7 @@
 				<select
 					name="status"
 					value={data.form?.status}
+					disabled={loading}
 					class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 				>
 					{#each actualStatus as status}
@@ -122,6 +136,7 @@
 					type="text"
 					name="imgSrc"
 					value={data.form?.imgSrc}
+					disabled={loading}
 					placeholder="https://janedoereccomendationimage.jpeg"
 					class="px-4 py-3 rounded-lg outline-none  bg-light-300 c-gray-800 max-w-2xl"
 				/>
@@ -133,8 +148,17 @@
 			</aside>
 				<button
 				type="submit"
-				class="px-5 py-3 rounded-lg  bg-rose-500 c-gray-50 font-semibold w-full max-w-2xl"
-				>Editar recomendación</button
+				disabled={loading}
+				class="px-5 py-3 rounded-lg flex flex-row items-center justify-center space-x-2 bg-rose-500 c-gray-50 font-semibold w-full max-w-2xl"
+				>
+				{#if loading}
+					<Spinner />
+					<span>Editando...</span>
+				{:else}
+					Editar recomendación
+				{/if}
+				
+				</button
 			>
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.externalErrors}
