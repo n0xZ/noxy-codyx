@@ -20,7 +20,7 @@ export const actions: Actions = {
 			const newRecommendation = await prisma.recommendation.create({
 				data: { ...formData.data, author: { connect: { id: locals.userId } } },
 			})
-			throw redirect(302, '/home')
+			if (newRecommendation) throw redirect(302, '/home')
 		} else {
 			const containsErrors = Boolean(
 				formData.error.formErrors.fieldErrors.name ||
