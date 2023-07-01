@@ -54,11 +54,12 @@ export const updateRecommendation = async ({
 	status,
 	note,
 	genre,
-	img,
+
 	id,
 }: UpdateRecommendationInput) => {
 	const updatedRecomm = await prisma.recommendation.update({
 		data: { name, rating, status, note, genre },
 		where: { id },
 	})
+	return updatedRecomm
 }
