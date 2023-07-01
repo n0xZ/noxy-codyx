@@ -10,6 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+model Image{
+  id String @id @default(cuid())
+  src String
+  width Int
+  height Int
+  recommendation Recommendation @relation(fields: [id], references: [id])
+   
+}
 model User {
   id              String           @id @default(cuid())
   username        String           @unique
@@ -24,7 +33,7 @@ model Recommendation {
   id        String   @id @unique @default(cuid())
   name      String
   note      String
-  imgSrc    String?
+img Image?
   createdAt DateTime @default(now())
   genre    Genre
   status Status @default(IN_PROGRESS)
