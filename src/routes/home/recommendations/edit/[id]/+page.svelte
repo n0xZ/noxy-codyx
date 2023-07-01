@@ -1,19 +1,21 @@
 <script lang="ts">
+	import type { SubmitFunction } from '@sveltejs/kit'
 	import { Status } from '@prisma/client'
 	import { enhance } from '$app/forms'
-
-	import type { ActionData, PageServerData } from './$types'
+	import {page } from '$app/stores'
  import Spinner from '$lib/components/icons/spinner.svelte'
 	import Input from '$lib/ui/input.svelte'
 	import Label from '$lib/ui/label.svelte'
-	import type { SubmitFunction } from '@sveltejs/kit'
 	import Button from '$lib/ui/button.svelte'
+	import type { ActionData, PageServerData } from './$types'
 
 	const actualGenres =["MOVIE" , "SERIE" , "ANIME" , "MANGA" , "NOVEL" , "OTHER"]
 	const actualStatus = Object.keys(Status)
+	let loading = false
+	const id = $page.params.id
 	export let form: ActionData
 	export let data: PageServerData
-		let loading = false
+
 	const updateRecommendation:SubmitFunction = () => {
 		loading = true
 		return async ({ update }) => {
@@ -27,7 +29,7 @@
 
 <section class="min-h-screen h-full grid place-items-center font-mukta">
 	<form
-		action={`/home/recommendations/edit/${data.form.id}?/edit-recommendation`}
+		action={`/home/recommendations/edit/${id}?/edit-recommendation`}
 		use:enhance={updateRecommendation}
 		method="post"
 		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-2"
@@ -137,16 +139,16 @@ class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 
 				>
 
 				<input
-					type="text"
-					name="imgSrc"
-					value={data.form?.imgSrc}
+					type="file"
+					name="img"
+					value={data.form?.img}
 					disabled={loading}
-					placeholder="https://janedoereccomendationimage.jpeg"
-				class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+					
+				
 				/>
 				<span class="h-5 c-red-500"
-					>{#if form?.containsErrors && form?.fields?.imgSrc}
-						<p>{form?.fields?.imgSrc}</p>
+					>{#if form?.containsErrors && form?.fields?.img}
+						<p>{form?.fields?.img}</p>
 					{/if}
 				</span>
 			</aside>
