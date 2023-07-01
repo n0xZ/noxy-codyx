@@ -5,6 +5,7 @@
 	import Spinner from '$lib/components/icons/spinner.svelte'
 	import Input from '$lib/ui/input.svelte'
 	import Label from '$lib/ui/label.svelte'
+	import Button from '$lib/ui/button.svelte'
 
 	const actualGenres =["MOVIE" , "SERIE" , "ANIME" , "MANGA" , "NOVEL" , "OTHER"]
 
@@ -23,7 +24,7 @@
 
 <section class="h-screen grid place-items-center font-mukta">
 	<form
-		action="/home/recommendations/create?/create-recommendation"
+		action="/home/recommendations/create?/create-recommendation" enctype="multipart/form-data"
 		use:enhance={createRecommendation}
 		method="post"
 		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-2"
@@ -54,11 +55,11 @@
 			>
 		</aside>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<label for="genre" class="font-semibold">Género de la recomendación</label>
+			<Label for="genre" >Género de la recomendación</Label>
 			<select
 				name="genre"
 				disabled={loading}
-				class="px-4 py-3 rounded-lg outline-none bg-light-300 text-gray-800 max-w-2xl"
+			class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 			>
 				{#each actualGenres as genre}
 					<option value={genre}>
@@ -72,15 +73,15 @@
 				{/if}</span
 			>
 			<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-				<label for="imgSrc" class="font-semibold"
-					>Imagen/Preview de la recomendación (Preferiblemente URL)</label
+				<Label for="img" 
+					>Imagen/Preview de la recomendación (Preferiblemente URL)</Label
 				>
 
 				<Input
 					type="text"
 					name="imgSrc"
 					disabled={loading}
-					placeholder="https://janedoereccomendationimage.jpeg"
+					placeholder="ingresa tu imagen acá"
 					class="px-4 py-3 rounded-lg outline-none  bg-light-300 text-gray-800 max-w-2xl"
 				/>
 				<span class="h-5 text-red-500"
@@ -89,17 +90,17 @@
 					{/if}
 				</span>
 			</aside>
-			<button
+			<Button
 				type="submit"
 				disabled={loading}
-				class="px-5 py-3 rounded-lg  flex flex-row items-center justify-center space-x-2 bg-rose-500 text-gray-50 font-semibold w-full max-w-2xl"
+				class="flex flex-row items-center space-x-2"
 				>{#if loading}
 					<Spinner />
 					<span>Cargando...</span>
 				{:else}
 					Crear nueva recomendación
 				{/if}
-			</button>
+			</Button>
 			<span class="h-5 text-red-500"
 				>{#if form?.containsErrors && form?.externalErrors}
 					<p>{form?.externalErrors}</p>
