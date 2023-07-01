@@ -39,6 +39,7 @@
     "domain-functions": "^1.7.1",
     "lucide-svelte": "^0.257.0",
     "prisma": "^4.16.2",
+    "radix-svelte": "^0.8.0",
     "tailwind-merge": "^1.13.2",
     "tailwindcss-animate": "^1.0.6",
     "vite-plugin-pwa": "^0.14.7",
