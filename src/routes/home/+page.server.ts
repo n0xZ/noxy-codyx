@@ -3,20 +3,17 @@ import { prisma } from '../../lib/server/prisma'
 import type { Actions } from './$types'
 
 export const load: ServerLoad = async ({ locals }) => {
-	if (!locals.userId) throw redirect(302, '/')
+	const session = await locals.getSession()
+	if (!session) throw redirect(302, '/')
 	const userReccomendations = await prisma.recommendation.findMany({
-		where: { authorId: locals.userId },
+		where: { author: { email: session.user?.email ?? '' } },
 	})
 	return { reccos: userReccomendations }
 }
 export const actions: Actions = {
-	logout: async ({ cookies }) => {
-		cookies.delete('user-session')
-		throw redirect(302, '/')
-	},
-	'delete-recommendation': async ({ request, url }) => {
+	'delete-recommendation': async ({ request }) => {
 		const formData = await request.formData()
-		const recommId = formData.get('id')
+		const recommId = formData.get('id') as string
 
 		await prisma.recommendation.delete({
 			where: { id: recommId },
