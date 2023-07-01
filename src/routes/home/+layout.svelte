@@ -1,6 +1,10 @@
 <script lang="ts">
-	import { enhance } from '$app/forms'
+		import { signOut } from '@auth/sveltekit/client';
+	import { env } from '$env/dynamic/public';
+
+
 	import MobileHomeMenu from "$lib/components/menu/home.svelte"
+	const callbackUrl = env.PUBLIC_AUTH_ORIGIN_URL;
 </script>
 
 <header class="p-4 ">
@@ -12,13 +16,15 @@
 		</h1>
 		<ul class="xl:flex hidden flex-row items-center space-x-4  ">
 			<a href="/home/recommendations/create">Crear nueva recomendación</a>
-			<form method="post" use:enhance action="/home?/logout">
+			
 				<button
 					type="submit"
 					class="p-3 rounded-lg bg-rose-500 text-gray-50 font-semibold "
+					on:click={() => signOut({ redirect: true, callbackUrl })}
+
 					>Cerrar sesión</button
 				>
-			</form>
+
 		</ul>
 		<MobileHomeMenu />
 	</nav>
