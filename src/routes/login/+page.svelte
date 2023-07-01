@@ -1,83 +1,31 @@
 <script lang="ts">
-	import { enhance, type SubmitFunction } from '$app/forms'
- import Spinner from '$lib/components/icons/spinner.svelte'
-	import type { ActionData } from './$types'
-	export let form: ActionData
-	
-	let loading = false
-const loginUser:SubmitFunction = ()=>{
-	loading=true
-	return async({update})=>{
-		
-		loading=false
-await update()
-	}
-}
+import {signIn} from '@auth/sveltekit/client'
+ import {Github} from 'lucide-svelte'
+ import {env} from '$env/dynamic/public'
+ 
+	import Button from '$lib/ui/button.svelte'
+	const callbackUrl = env.PUBLIC_AUTH_CALLBACK_URL+ "/home"
+
 </script>
 
 <svelte:head><title>Codyx - Iniciar sesión</title></svelte:head>
 
-<section class="h-screen grid place-items-center font-mukta">
-	<form
-		action="/login?/loginUser"
-		use:enhance={loginUser}
-		method="post"
-		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-1"
+<main class="h-screen grid place-items-center ">
+	<section
+		class="flex flex-col justify-center space-y-3 max-w-xl container mx-auto border-2 p-3 border-primary/10 rounded-md h-1/2"
 	>
-	<h2 class=" text-3xl text-center font-semibold">Inicia sesión en Codyx!</h2>
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<label for="email" class="font-semibold">Correo electrónico</label>
-			<input
-				type="email"
-				name="email"
-				disabled={loading}
-								placeholder="janedoe@email.net"
-				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
-			/>
-			<span class="h-5 c-red-500"
-				>{#if form?.containsErrors && form?.fields?.email}
-					<p>{form?.fields?.email}</p>
-				{/if}</span
-			>
-		</aside>
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<label for="password" class="font-semibold">Contraseña</label>
-
-			<input
-				type="password"
-				name="password"
-				disabled={loading}
-					placeholder="janepassword"
-				class="px-4 py-3 rounded-lg outline-none  bg-light-300 c-gray-800 max-w-2xl"
-			/>
-			<span class="h-5 c-red-500"
-				>{#if form?.containsErrors && form?.fields?.password}
-					<p>{form?.fields?.password  }</p>
-			
-				{/if}
-			</span>
-		</aside>
-		<button
-			type="submit"
-			disabled={loading}
-			class="px-5 py-3 rounded-lg  flex flex-row items-center justify-center space-x-2 bg-rose-500 c-gray-50 font-semibold w-full max-w-2xl"
-			>
-			{#if loading}
-
-					<Spinner/>
-				<span>Cargando...</span>
-				{:else}
-				Iniciar sesión
-			{/if}
-		</button
+		<h2
+			class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-center"
 		>
-	
-			<span class="h-5 c-red-500"
-				>{#if form?.containsErrors && form?.externalErrors}
-					<p>{form?.externalErrors  }</p>
-			
-				{/if}
-			</span>
-			<a href="/register" class="text-center underline">No tengo una cuenta</a>
-	</form>
-</section>
+			Inicia sesión en Codyx!
+		</h2>
+
+		<Button
+			class="flex flex-row items-center space-x-2"
+			on:click={() => signIn('github', { callbackUrl })}
+		>
+			<Github class="h-6 w-6" />
+			<span>Iniciar sesión desde Github</span></Button
+		>
+	</section>
+</main>
