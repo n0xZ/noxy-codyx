@@ -1,16 +1,20 @@
 <script lang="ts">
 	import { Status } from '@prisma/client'
-	import { enhance, type SubmitFunction } from '$app/forms'
+	import { enhance } from '$app/forms'
 
 	import type { ActionData, PageServerData } from './$types'
  import Spinner from '$lib/components/icons/spinner.svelte'
+	import Input from '$lib/ui/input.svelte'
+	import Label from '$lib/ui/label.svelte'
+	import type { SubmitFunction } from '@sveltejs/kit'
+	import Button from '$lib/ui/button.svelte'
 
 	const actualGenres =["MOVIE" , "SERIE" , "ANIME" , "MANGA" , "NOVEL" , "OTHER"]
 	const actualStatus = Object.keys(Status)
 	export let form: ActionData
 	export let data: PageServerData
 		let loading = false
-	const updateRecommendation: SubmitFunction = () => {
+	const updateRecommendation:SubmitFunction = () => {
 		loading = true
 		return async ({ update }) => {
 			loading = false
@@ -30,14 +34,14 @@
 	>
 		<h2 class="text-center text-3xl">Editar recomendación</h2>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<label for="name" class="font-semibold">Nombre de la recomendación</label>
-			<input
+			<Label for="name" >Nombre de la recomendación</Label>
+			<Input
 				type="text"
 				name="name"
 				value={data.form?.name}
 				disabled={loading}
 				placeholder="'The Lord of the Rings: The Two Towers'"
-				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
+
 			/>
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.fields?.name}
@@ -46,8 +50,8 @@
 			>
 		</aside>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<label for="note" class="font-semibold">Nota de la recomendación</label>
-			<input
+			<Label for="note" >Nota de la recomendación</Label>
+			<Input
 				type="text"
 				name="note"
 				value={data.form?.note}
@@ -62,12 +66,12 @@
 			>
 		</aside>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<label for="genre" class="font-semibold">Género de la recomendación</label>
+			<Label for="genre" >Género de la recomendación</Label>
 			<select
 				name="genre"
 				value={data.form.genre}
 				disabled={loading}
-				class="px-4 py-3 rounded-lg outline-none bg-light-300  c-gray-800 max-w-2xl "
+class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 			>
 				{#each actualGenres as genre}
 					<option value={genre}>
@@ -82,8 +86,8 @@
 			>
 		</aside>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<label for="rating" class="font-semibold"
-				>Puntaje de la recomendación (del 1 al 10)</label
+			<Label for="rating" 
+				>Puntaje de la recomendación (del 1 al 10)</Label
 			>
 			<input
 				type="number"
@@ -91,7 +95,7 @@
 				value={data.form?.rating && ''}
 				disabled={loading}
 				placeholder="Por ej. 6"
-				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
+class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 			/>
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.fields?.rating}
@@ -100,16 +104,16 @@
 			>
 		</aside>
 
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+
 			<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-				<label for="status" class="font-semibold"
+				<Label for="status" 
 					>Estado actual de la recomendación
-				</label>
+				</Label>
 				<select
 					name="status"
 					value={data.form?.status}
 					disabled={loading}
-					class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
+			class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 				>
 					{#each actualStatus as status}
 						<option value={status}>
@@ -126,10 +130,10 @@
 			
 		
 			
-		</aside>
+
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-				<label for="password" class="font-semibold"
-					>Imagen/Preview de la recomendación (Preferiblemente URL)</label
+				<Label for="password" 
+					>Imagen/Preview de la recomendación (Preferiblemente URL)</Label
 				>
 
 				<input
@@ -138,7 +142,7 @@
 					value={data.form?.imgSrc}
 					disabled={loading}
 					placeholder="https://janedoereccomendationimage.jpeg"
-					class="px-4 py-3 rounded-lg outline-none  bg-light-300 c-gray-800 max-w-2xl"
+				class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 				/>
 				<span class="h-5 c-red-500"
 					>{#if form?.containsErrors && form?.fields?.imgSrc}
@@ -146,11 +150,11 @@
 					{/if}
 				</span>
 			</aside>
-				<button
+				<Button
 				type="submit"
 				disabled={loading}
-				class="px-5 py-3 rounded-lg flex flex-row items-center justify-center space-x-2 bg-rose-500 c-gray-50 font-semibold w-full max-w-2xl"
-				>
+	 class="flex flex-row items-center space-x-2"		
+  				>
 				{#if loading}
 					<Spinner />
 					<span>Editando...</span>
@@ -158,7 +162,7 @@
 					Editar recomendación
 				{/if}
 				
-				</button
+				</Button
 			>
 			<span class="h-5 c-red-500"
 				>{#if form?.containsErrors && form?.externalErrors}
