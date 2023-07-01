@@ -1,6 +1,6 @@
 
 <script lang="ts">
-import MobileLandingMenu from '$lib/components/menu/landing.svelte'
+
 
 </script>
 <svelte:head>
@@ -17,25 +17,17 @@ import MobileLandingMenu from '$lib/components/menu/landing.svelte'
 				>Codyx</a
 			>
 		</h1>
-		<ul class="xl:flex hidden flex-row items-center space-x-4  opacity-90">
+		<ul class="flex  flex-row items-center space-x-4  opacity-90">
 			<li>
 				<a
 					href="/login"
 			
 				>
-					INICIAR SESIÓN
+					Iniciar sesión
 				</a>
 			</li>
-			<li>
-				<a
-					href="/register"
-		
-				>
-					UNETE YA
-				</a>
-			</li>
-		</ul>
-		<MobileLandingMenu/>
+	
+
 	</nav>
 </header>
 <section
