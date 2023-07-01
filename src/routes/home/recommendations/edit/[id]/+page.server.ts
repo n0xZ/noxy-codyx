@@ -5,7 +5,7 @@ import type { Actions } from './$types'
 const editRecommendationSchema = z.object({
 	name: z.string().min(3, { message: 'Campo requerido' }),
 	note: z.string(),
-	imgSrc: z.string().url(),
+	img: z.instanceof(File).refine((f) => f.size < 0, 'Este campo es requerido'),
 	genre: z.enum(['MOVIE', 'SERIE', 'ANIME', 'MANGA', 'NOVEL', 'OTHER']),
 	status: z.enum(['IN_PROGRESS', 'FINISHED']),
 	rating: z.string().optional(),
@@ -13,6 +13,14 @@ const editRecommendationSchema = z.object({
 export const load: ServerLoad = async ({ params }) => {
 	const existingRecommendation = await prisma.recommendation.findUnique({
 		where: { id: params.id },
+		select: {
+			img: true,
+			name: true,
+			note: true,
+			genre: true,
+			status: true,
+			rating: true,
+		},
 	})
 
 	if (!existingRecommendation) throw redirect(302, '/home')
@@ -32,7 +40,6 @@ export const actions: Actions = {
 					name: formData.data.name,
 					note: formData.data.note,
 					genre: formData.data.genre,
-					imgSrc: formData.data.imgSrc,
 					status: formData.data.status,
 					rating: formData.data.rating ? parseInt(formData.data.rating) : null,
 				},
