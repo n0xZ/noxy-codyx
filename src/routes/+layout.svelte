@@ -1,6 +1,6 @@
 <script lang="ts">
-import '@unocss/reset/antfu.css'
-import 'virtual:uno.css'
+  import "../app.postcss";
+
 </script>
 
-<main class=" c-gray-900 h-full w-full min-h-screen"><slot/></main>
+<main class=" c-gray-900 h-full w-full min-h-screen font-inter"><slot /></main>
