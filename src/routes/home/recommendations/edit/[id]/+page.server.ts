@@ -45,12 +45,12 @@ export const actions: Actions = {
 				},
 				where: { id: params.id },
 			})
-			throw redirect(302, '/home')
+			if (newRecommendation) throw redirect(302, '/home')
 		} else {
 			const containsErrors = Boolean(
 				formData.error.formErrors.fieldErrors.name ||
 					formData.error.formErrors.fieldErrors.note ||
-					formData.error.formErrors.fieldErrors.imgSrc ||
+					formData.error.formErrors.fieldErrors.img ||
 					formData.error.formErrors.fieldErrors.genre ||
 					formData.error.formErrors.fieldErrors.status ||
 					formData.error.formErrors.fieldErrors.rating
@@ -60,7 +60,7 @@ export const actions: Actions = {
 				fields: {
 					name: formData.error.formErrors.fieldErrors.name?.[0],
 					note: formData.error.formErrors.fieldErrors.note?.[0],
-					imgSrc: formData.error.formErrors.fieldErrors.imgSrc?.[0],
+					img: formData.error.formErrors.fieldErrors.img?.[0],
 					genre: formData.error.formErrors.fieldErrors.genre?.[0],
 					status: formData.error.formErrors.fieldErrors.status?.[0],
 					rating: formData.error.formErrors.fieldErrors.rating?.[0],
