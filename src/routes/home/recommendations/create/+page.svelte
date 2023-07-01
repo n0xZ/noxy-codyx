@@ -78,15 +78,15 @@
 				>
 
 				<Input
-					type="text"
-					name="imgSrc"
+					type="file"
+					name="img"
 					disabled={loading}
 					placeholder="ingresa tu imagen acá"
 					class="px-4 py-3 rounded-lg outline-none  bg-light-300 text-gray-800 max-w-2xl"
 				/>
 				<span class="h-5 text-red-500"
-					>{#if form?.containsErrors && form?.fields?.imgSrc}
-						<p>{form?.fields?.imgSrc}</p>
+					>{#if form?.containsErrors && form?.fields?.img}
+						<p>{form?.fields?.img}</p>
 					{/if}
 				</span>
 			</aside>
