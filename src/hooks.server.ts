@@ -1,7 +1,11 @@
 import { SvelteKitAuth } from '@auth/sveltekit'
 import GitHub from '@auth/core/providers/github'
 import { PrismaAdapter } from '@auth/prisma-adapter'
-import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from '$env/static/private'
+import {
+	GITHUB_CLIENT_ID,
+	GITHUB_CLIENT_SECRET,
+	SESSION_SECRET,
+} from '$env/static/private'
 import { prisma } from '$lib/server/prisma'
 
 export const handle = SvelteKitAuth({
@@ -13,4 +17,5 @@ export const handle = SvelteKitAuth({
 			clientSecret: GITHUB_CLIENT_SECRET,
 		}),
 	],
+	secret: SESSION_SECRET,
 })
