@@ -14,10 +14,15 @@ const authorization: Handle = async ({ event, resolve }) => {
 	if (event.url.pathname.startsWith('/home')) {
 		const session = await event.locals.getSession()
 		if (!session) {
-			throw redirect(303, '/auth')
+			throw redirect(303, '/login')
 		}
 	}
-
+	if (event.url.pathname.startsWith('/login')) {
+		const session = await event.locals.getSession()
+		if (session) {
+			throw redirect(303, '/home')
+		}
+	}
 	// If the request is still here, just proceed as normally
 	return resolve(event)
 }
