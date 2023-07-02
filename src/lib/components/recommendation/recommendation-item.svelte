@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { Image, Recommendation } from '@prisma/client'
+	import type { Recommendation } from '@prisma/client'
 	import { enhance } from '$app/forms'
 	import Edit from '../icons/edit.svelte'
 	import Delete from '../icons/delete.svelte'
 
-interface RecommendationWithImage extends Recommendation{
-	img?: Image
-}
+	interface RecommendationWithImage extends Recommendation {
+		img?: any
+	}
 	function handleGenreBackgroundColor (genre: string)  {
 		
 		switch (genre) {
@@ -42,7 +42,7 @@ const genreBgColor = handleGenreBackgroundColor(recommendation.genre)
 		class="flex flex-col justify-center items-center rounded-md    shadow-md bg-light-50  text-center h-auto w-72"
 	>
 		<img
-			src={recommendation.img?.src}
+			src={recommendation.img.src}
 			width="288"
 			height="200"
 			class="rounded-sm aspect-a"
