@@ -39,16 +39,10 @@
 						href="/login"
 						class="group flex w-full items-center rounded-md px-2 py-2 text-sm text-gray-900 hover:bg-rose-500 hover-c-white duration-100 ease-in-out"
 					>
-						INICIAR SESIÓN
+						Iniciar sesión
 					</a>
 				</MenuItem>
-				<MenuItem>
-			
-						<a
-							href="/register"
-							class="group flex w-full items-center rounded-md px-2 py-2 text-sm text-gray-900 hover:bg-rose-500 hover-c-white duration-100 ease-in-out"
-							>UNETE YA</a>
-				</MenuItem>
+	
 
 			</div>
 		</MenuItems>
