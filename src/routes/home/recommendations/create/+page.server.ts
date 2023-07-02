@@ -1,6 +1,6 @@
 import type { Actions } from './$types'
 import { z } from 'zod'
-import { fail } from '@sveltejs/kit'
+import { fail, redirect } from '@sveltejs/kit'
 import { imageKit } from '$lib/server/imagekit'
 import { createRecommendation } from '$lib/server/models/recommendation.server'
 
@@ -9,7 +9,10 @@ const createRecommendationSchema = z.object({
 	note: z.string().min(3, { message: 'Campo requerido' }),
 	img: z
 		.instanceof(File, { message: 'Este campo es requerido' })
-		.refine((f) => f.size > 0, { message: 'Este campo es requerido' }),
+		.refine((f) => f.size > 0, { message: 'Este campo es requerido' })
+		.refine((f) => f.type.startsWith('image/'), {
+			message: 'El archivo debe ser una imagen',
+		}),
 	genre: z.enum(['MOVIE', 'SERIE', 'ANIME', 'MANGA', 'NOVEL', 'OTHER'], {
 		invalid_type_error: 'El género ingresado no coincide con los existentes.',
 	}),
@@ -41,6 +44,7 @@ export const actions: Actions = {
 			if (!newRecomm) {
 				return fail(500, { message: 'Error al crear la recomendación' })
 			}
+			throw redirect(302, '/home')
 		} else {
 			const containsErrors = Boolean(
 				formData.error.formErrors.fieldErrors.name ||
