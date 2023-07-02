@@ -14,6 +14,7 @@ datasource db {
 model Image{
   id String @id @default(cuid())
   src String
+  fileId String
   width Int
   height Int
   recommendation Recommendation @relation(fields: [id], references: [id],onDelete: Cascade, onUpdate: Cascade)
