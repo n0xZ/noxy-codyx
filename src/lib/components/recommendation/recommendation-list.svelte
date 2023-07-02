@@ -1,10 +1,12 @@
 <script lang="ts">
-	import type {Recommendation } from '@prisma/client'
+	import type {Image, Recommendation } from '@prisma/client'
 
  import RecommendationItem from './recommendation-item.svelte'
-
+interface RecommendationWithImage extends Recommendation{
+	img?: Image
+}
 	type RecommendationListProps = {
-		reccos: Recommendation[]
+		reccos: RecommendationWithImage[]
 	}
 	export let props: RecommendationListProps
 
