@@ -2,14 +2,16 @@ import { fail, redirect, type ServerLoad } from '@sveltejs/kit'
 import { prisma } from '$lib/server/prisma'
 import { z } from 'zod'
 import type { Actions } from './$types'
+
 const editRecommendationSchema = z.object({
 	name: z.string().min(3, { message: 'Campo requerido' }),
 	note: z.string(),
-	img: z.instanceof(File).refine((f) => f.size < 0, 'Este campo es requerido'),
+	img: z.any(),
 	genre: z.enum(['MOVIE', 'SERIE', 'ANIME', 'MANGA', 'NOVEL', 'OTHER']),
 	status: z.enum(['IN_PROGRESS', 'FINISHED']),
 	rating: z.string().optional(),
 })
+
 export const load: ServerLoad = async ({ params }) => {
 	const existingRecommendation = await prisma.recommendation.findUnique({
 		where: { id: params.id },
