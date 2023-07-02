@@ -22,21 +22,22 @@
 
 <svelte:head><title>Codyx - Crear nueva recomendación</title></svelte:head>
 
-<section class="h-screen grid place-items-center font-mukta">
+<section class="container w-full h-screen max-w-4xl mx-auto mt-5">
 	<form
 		action="/home/recommendations/create?/create-recommendation"
 		enctype="multipart/form-data"
 		use:enhance={createRecommendation}
 		method="post"
-		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-2"
+			class="container  h-screen   flex flex-col justify-center space-y-3 w-full"
 	>
-		<h1 class="text-center text-3xl font-semibold">Crear nueva recomendación</h1>
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+		<h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-center mb-3">Crea tu nueva recomendación!</h2>
+		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
 			<Label for="name">Nombre de la recomendación</Label>
 			<Input
 				type="text"
 				name="name"
 				placeholder="'The Lord of the Rings: The Two Towers'"
+				class="max-w-4xl"
 			/>
 			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.name}
@@ -44,7 +45,7 @@
 				{/if}</span
 			>
 		</aside>
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
 			<Label for="note">Nota de la recomendación</Label>
 			<Input
 				type="text"
@@ -58,7 +59,7 @@
 				{/if}</span
 			>
 		</aside>
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
 			<Label for="genre">Género de la recomendación</Label>
 			<select
 				name="genre"
@@ -76,7 +77,7 @@
 					<p>{form?.fields?.genre}</p>
 				{/if}</span
 			>
-			<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+			<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
 				<Label for="img"
 					>Imagen/Preview de la recomendación (Preferiblemente URL)</Label
 				>
@@ -86,7 +87,7 @@
 					name="img"
 					disabled={loading}
 					placeholder="ingresa tu imagen acá"
-					class="px-4 py-3 rounded-lg outline-none  bg-light-300 text-gray-800 max-w-2xl"
+					class="px-4 py-3 rounded-lg outline-none  bg-light-300 text-gray-800 max-w-4xl"
 					accept=".jpg, .jpeg, .png, .webp"
 				/>
 				<span class="h-5 text-xs text-red-500"

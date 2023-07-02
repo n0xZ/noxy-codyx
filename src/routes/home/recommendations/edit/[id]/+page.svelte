@@ -27,15 +27,15 @@
 
 <svelte:head><title>Codyx - Editar recomendación existente</title></svelte:head>
 
-<section class="min-h-screen h-full grid place-items-center font-mukta">
+<section class="container w-full h-screen max-w-4xl mx-auto mt-5">
 	<form
 		action={`/home/recommendations/edit/${id}?/edit-recommendation`}
 		use:enhance={updateRecommendation}
 		method="post"
-		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-2"
+		class="container  h-screen   flex flex-col justify-center space-y-3 w-full"
 	>
-		<h2 class="text-center text-3xl">Editar recomendación</h2>
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+		<h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-center mb-3">Editar recomendación</h2>
+		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
 			<Label for="name" >Nombre de la recomendación</Label>
 			<Input
 				type="text"
@@ -51,7 +51,7 @@
 				{/if}</span
 			>
 		</aside>
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
 			<Label for="note" >Nota de la recomendación</Label>
 			<Input
 				type="text"
@@ -59,7 +59,7 @@
 				value={data.form?.note}
 				disabled={loading}
 				placeholder="'Está muy bien este ejemplo. Pero lo miraré más adelante...'"
-				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
+				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-4xl"
 			/>
 			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.note}
@@ -67,7 +67,7 @@
 				{/if}</span
 			>
 		</aside>
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
 			<Label for="genre" >Género de la recomendación</Label>
 			<select
 				name="genre"
@@ -87,7 +87,7 @@ class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 
 				{/if}</span
 			>
 		</aside>
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
 			<Label for="rating" 
 				>Puntaje de la recomendación (del 1 al 10)</Label
 			>
@@ -107,7 +107,7 @@ class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 
 		</aside>
 
 
-			<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+			<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
 				<Label for="status" 
 					>Estado actual de la recomendación
 				</Label>
@@ -133,7 +133,7 @@ class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 
 		
 			
 
-		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
+		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
 				<Label for="img" 
 					>Imagen/Preview de la recomendación</Label
 				>
