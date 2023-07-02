@@ -2,18 +2,17 @@ import type { Actions } from './$types'
 import { z } from 'zod'
 import { fail } from '@sveltejs/kit'
 import { imageKit } from '$lib/server/imagekit'
-import { parseFileToBase64 } from '$lib/server/parse-file'
 import { createRecommendation } from '$lib/server/models/recommendation.server'
 
 const createRecommendationSchema = z.object({
 	name: z.string().min(3, { message: 'Campo requerido' }),
-	note: z.string(),
+	note: z.string().min(3, { message: 'Campo requerido' }),
 	img: z
-		.instanceof(File)
-		.refine((f) => f.size < 0, 'Este campo es requerido')
-		.refine((f) => f.type),
-
-	genre: z.enum(['MOVIE', 'SERIE', 'ANIME', 'MANGA', 'NOVEL', 'OTHER']),
+		.instanceof(File, { message: 'Este campo es requerido' })
+		.refine((f) => f.size > 0, { message: 'Este campo es requerido' }),
+	genre: z.enum(['MOVIE', 'SERIE', 'ANIME', 'MANGA', 'NOVEL', 'OTHER'], {
+		invalid_type_error: 'El género ingresado no coincide con los existentes.',
+	}),
 })
 export const actions: Actions = {
 	'create-recommendation': async ({ request, locals }) => {
@@ -21,13 +20,14 @@ export const actions: Actions = {
 			await request.formData()
 		) as z.infer<typeof createRecommendationSchema>
 		const formData = createRecommendationSchema.safeParse(requestFormData)
-		console.log(formData)
+
 		if (formData.success) {
-			const session = await locals.getSession()
 			const { genre, img, name, note } = formData.data
-			const parsedImage = await parseFileToBase64(img)
+			const arrayBuffer = await img.arrayBuffer()
+			const buffer = Buffer.from(arrayBuffer)
+			const session = await locals.getSession()
 			const result = await imageKit.upload({
-				file: parsedImage,
+				file: buffer,
 				fileName: formData.data.img.name,
 				tags: ['recommendation'],
 			})
