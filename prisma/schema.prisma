@@ -16,7 +16,7 @@ model Image{
   src String
   width Int
   height Int
-  recommendation Recommendation @relation(fields: [id], references: [id])
+  recommendation Recommendation @relation(fields: [id], references: [id],onDelete: Cascade, onUpdate: Cascade)
    
 }
 
