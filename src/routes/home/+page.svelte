@@ -1,6 +1,7 @@
 <script lang="ts">
  import type {PageServerData } from "./$types"
 import RecommendationList from "$lib/components/recommendation/recommendation-list.svelte";
+mport type { Image, Recommendation } from "@prisma/client"
 
 
 export let data :PageServerData
