@@ -45,7 +45,7 @@
 				placeholder="'The Lord of the Rings: The Two Towers'"
 
 			/>
-			<span class="h-5 c-red-500"
+			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.name}
 					<p>{form?.fields?.name}</p>
 				{/if}</span
@@ -61,7 +61,7 @@
 				placeholder="'Está muy bien este ejemplo. Pero lo miraré más adelante...'"
 				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-2xl"
 			/>
-			<span class="h-5 c-red-500"
+			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.note}
 					<p>{form?.fields?.note}</p>
 				{/if}</span
@@ -81,7 +81,7 @@ class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 
 					</option>
 				{/each}
 			</select>
-			<span class="h-5 c-red-500"
+			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.genre}
 					<p>{form?.fields?.genre}</p>
 				{/if}</span
@@ -99,7 +99,7 @@ class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 
 				placeholder="Por ej. 6"
 class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 			/>
-			<span class="h-5 c-red-500"
+			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.rating}
 					<p>{form?.fields?.rating}</p>
 				{/if}</span
@@ -123,7 +123,7 @@ class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 
 						</option>
 					{/each}
 				</select>
-				<span class="h-5 c-red-500"
+				<span class="h-5 text-xs text-red-500"
 					>{#if form?.containsErrors && form?.fields?.status}
 						<p>{form?.fields?.status}</p>
 					{/if}</span
@@ -134,19 +134,19 @@ class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 
 			
 
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-				<Label for="password" 
-					>Imagen/Preview de la recomendación (Preferiblemente URL)</Label
+				<Label for="img" 
+					>Imagen/Preview de la recomendación</Label
 				>
 
 				<input
 					type="file"
 					name="img"
-					value={data.form?.img}
+					
 					disabled={loading}
 					
 				
 				/>
-				<span class="h-5 c-red-500"
+				<span class="h-5 text-xs text-red-500"
 					>{#if form?.containsErrors && form?.fields?.img}
 						<p>{form?.fields?.img}</p>
 					{/if}
@@ -166,7 +166,7 @@ class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 
 				
 				</Button
 			>
-			<span class="h-5 c-red-500"
+			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.externalErrors}
 					<p>{form?.externalErrors}</p>
 				{/if}

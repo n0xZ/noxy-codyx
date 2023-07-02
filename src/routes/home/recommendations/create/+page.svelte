@@ -7,7 +7,7 @@
 	import Label from '$lib/ui/label.svelte'
 	import Button from '$lib/ui/button.svelte'
 
-	const actualGenres =["MOVIE" , "SERIE" , "ANIME" , "MANGA" , "NOVEL" , "OTHER"]
+	const actualGenres = ['MOVIE', 'SERIE', 'ANIME', 'MANGA', 'NOVEL', 'OTHER']
 
 	export let form: ActionData
 	let loading = false
@@ -24,7 +24,8 @@
 
 <section class="h-screen grid place-items-center font-mukta">
 	<form
-		action="/home/recommendations/create?/create-recommendation" enctype="multipart/form-data"
+		action="/home/recommendations/create?/create-recommendation"
+		enctype="multipart/form-data"
 		use:enhance={createRecommendation}
 		method="post"
 		class=" flex flex-col justify-center space-y-6 max-w-2xl w-full xl:p-0 p-2"
@@ -32,34 +33,37 @@
 		<h1 class="text-center text-3xl font-semibold">Crear nueva recomendación</h1>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
 			<Label for="name">Nombre de la recomendación</Label>
-		<Input  type="text" name="name" placeholder="'The Lord of the Rings: The Two Towers'"/>
-			<span class="h-5 text-red-500"
+			<Input
+				type="text"
+				name="name"
+				placeholder="'The Lord of the Rings: The Two Towers'"
+			/>
+			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.name}
 					<p>{form?.fields?.name}</p>
 				{/if}</span
 			>
 		</aside>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<Label for="note" >Nota de la recomendación</Label>
+			<Label for="note">Nota de la recomendación</Label>
 			<Input
 				type="text"
 				name="note"
 				disabled={loading}
 				placeholder="'Está muy bien este ejemplo. Pero lo miraré más adelante...'"
-	
 			/>
-			<span class="h-5 text-red-500"
+			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.note}
 					<p>{form?.fields?.note}</p>
 				{/if}</span
 			>
 		</aside>
 		<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-			<Label for="genre" >Género de la recomendación</Label>
+			<Label for="genre">Género de la recomendación</Label>
 			<select
 				name="genre"
 				disabled={loading}
-			class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+				class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 			>
 				{#each actualGenres as genre}
 					<option value={genre}>
@@ -67,13 +71,13 @@
 					</option>
 				{/each}
 			</select>
-			<span class="h-5 text-red-500"
+			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.genre}
 					<p>{form?.fields?.genre}</p>
 				{/if}</span
 			>
 			<aside class="flex flex-col justify-center space-y-3 max-w-2xl">
-				<Label for="img" 
+				<Label for="img"
 					>Imagen/Preview de la recomendación (Preferiblemente URL)</Label
 				>
 
@@ -83,8 +87,9 @@
 					disabled={loading}
 					placeholder="ingresa tu imagen acá"
 					class="px-4 py-3 rounded-lg outline-none  bg-light-300 text-gray-800 max-w-2xl"
+					accept=".jpg, .jpeg, .png, .webp"
 				/>
-				<span class="h-5 text-red-500"
+				<span class="h-5 text-xs text-red-500"
 					>{#if form?.containsErrors && form?.fields?.img}
 						<p>{form?.fields?.img}</p>
 					{/if}
@@ -101,7 +106,7 @@
 					Crear nueva recomendación
 				{/if}
 			</Button>
-			<span class="h-5 text-red-500"
+			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.externalErrors}
 					<p>{form?.externalErrors}</p>
 				{/if}
