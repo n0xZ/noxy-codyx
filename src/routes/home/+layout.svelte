@@ -9,7 +9,7 @@
 
 <header class="p-4 ">
 	<nav
-		class="flex flex-row items-center justify-between container mx-auto max-w-4xl xl:text-lg text-base font-normal font-commissioner "
+		class="flex flex-row items-center justify-between container mx-auto max-w-4xl xl:text-lg text-base  "
 	>
 		<h1>
 			<a href="/home" class="no-underline text-rose-500  font-semibold"> Codyx </a>
