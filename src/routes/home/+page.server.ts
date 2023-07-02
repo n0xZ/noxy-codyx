@@ -5,6 +5,7 @@ import {
 	deleteRecommendation,
 	recommendationsByAuthor,
 } from '$lib/server/models/recommendation.server'
+import { imageKit } from '$lib/server/imagekit'
 
 export const load: ServerLoad = async ({ locals }) => {
 	const session = await locals.getSession()
@@ -19,7 +20,11 @@ export const actions: Actions = {
 	'delete-recommendation': async ({ request }) => {
 		const formData = await request.formData()
 		const id = formData.get('id') as string
-
-		await deleteRecommendation(id)
+		const recc = await prisma.recommendation.findUnique({
+			where: { id },
+			select: { id: true, img: { select: { fileId: true } } },
+		})
+		await deleteRecommendation(recc?.id ?? '')
+		await imageKit.deleteFile(recc?.img?.fileId ?? '')
 	},
 }
