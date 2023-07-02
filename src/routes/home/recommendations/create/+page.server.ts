@@ -34,12 +34,18 @@ export const actions: Actions = {
 				fileName: formData.data.img.name,
 				tags: ['recommendation'],
 			})
+			result.fileId
 			const newRecomm = await createRecommendation({
 				name,
 				note,
 				authorEmail: session?.user?.email ?? '',
 				genre,
-				img: { src: result.url, width: result.width, height: result.height },
+				img: {
+					src: result.url,
+					width: result.width,
+					height: result.height,
+					fileId: result.fileId,
+				},
 			})
 			if (!newRecomm) {
 				return fail(500, { message: 'Error al crear la recomendación' })
