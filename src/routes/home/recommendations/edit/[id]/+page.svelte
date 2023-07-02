@@ -30,6 +30,7 @@
 <section class="container w-full h-screen max-w-4xl mx-auto mt-5">
 	<form
 		action={`/home/recommendations/edit/${id}?/edit-recommendation`}
+		enctype="multipart/form-data"
 		use:enhance={updateRecommendation}
 		method="post"
 		class="container  h-screen   flex flex-col justify-center space-y-3 w-full"
