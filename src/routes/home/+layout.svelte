@@ -1,29 +1,21 @@
 <script lang="ts">
 	import { signOut } from '@auth/sveltekit/client'
-	import { env } from '$env/dynamic/public';
-	const callbackUrl = env.PUBLIC_AUTH_ORIGIN_URL;
-	import MobileHomeMenu from '$lib/components/menu/home.svelte'
+	import { env } from '$env/dynamic/public'
 
-	const signOutUser = () => signOut({redirect:false,callbackUrl})
+	import HomeSheet from '$lib/components/sheet/home.svelte'
+	import type { LayoutServerData } from './$types'
+
+	const callbackUrl = env.PUBLIC_AUTH_ORIGIN_URL
+	const signOutUser = () => signOut({ redirect: false, callbackUrl })
+	export let data: LayoutServerData
 </script>
 
 <header class="p-5 w-full">
 	<nav
 		class="flex flex-row items-center justify-between container w-full mx-auto max-w-4xl text-base"
 	>
-		<h1>
-			<a href="/home" class="no-underline text-rose-500 font-semibold"> Codyx </a>
-		</h1>
-		<ul class="xl:flex hidden flex-row items-center space-x-4 opacity-70">
-			<a href="/home/recommendations/create">Crear nueva recomendación</a>
-
-			<button
-				type="button"
-				class="rounded-lg p-3 bg-rose-500 text-gray-50 font-semibold"
-				on:click={signOutUser}>Cerrar sesión</button
-			>
-		</ul>
-		<MobileHomeMenu />
+		<a href="/home" class="hover:underline" data-sveltekit-preload-data="hover">Home</a>
+		<HomeSheet userMetadata={data.session} />
 	</nav>
 </header>
 <div class="h-full mt-4"><slot /></div>
