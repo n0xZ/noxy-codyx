@@ -55,6 +55,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  isContentPublic Boolean @default(false)
   accounts      Account[]
   sessions      Session[]
   recommendations Recommendation[]
