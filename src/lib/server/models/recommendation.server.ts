@@ -1,4 +1,4 @@
-import type { Image, Genre } from '@prisma/client'
+import type { Image, Genre, Recommendation } from '@prisma/client'
 import { prisma } from '../prisma'
 
 export const recommendationsByAuthor = async (authorEmail: string) => {
@@ -58,7 +58,7 @@ export const updateRecommendation = async ({
 	genre,
 
 	id,
-}: UpdateRecommendationInput) => {
+}: Partial<Recommendation>) => {
 	const updatedRecomm = await prisma.recommendation.update({
 		data: { name, rating, status, note, genre },
 		where: { id },
