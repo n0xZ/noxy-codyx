@@ -11,27 +11,21 @@ import { prisma } from '$lib/server/prisma'
 import { sequence } from '@sveltejs/kit/hooks'
 
 const authorization: Handle = async ({ event, resolve }) => {
-	// Protect any routes under /authenticated
 	if (event.url.pathname.startsWith('/home')) {
-		const session = await event.locals.getSession()
-		if (!session) throw redirect(303, '/')
+		const sess = await event.locals.getSession()
+		if (!sess) throw redirect(302, '/')
 	}
 
-	// If the request is still here, just proceed as normally
 	return resolve(event)
 }
 
-export const handle = sequence(
+export const handle: Handle = sequence(
 	SvelteKitAuth({
 		adapter: PrismaAdapter(prisma),
 		providers: [
-			// @ts-ignore
-			GitHub({
-				clientId: GITHUB_CLIENT_ID,
-				clientSecret: GITHUB_CLIENT_SECRET,
-			}),
+			GitHub({ clientId: GITHUB_CLIENT_ID, clientSecret: GITHUB_CLIENT_SECRET }),
 		],
 		secret: SESSION_SECRET,
-		authorization,
-	})
+	}),
+	authorization
 )
