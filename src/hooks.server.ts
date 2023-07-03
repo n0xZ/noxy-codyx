@@ -8,34 +8,30 @@ import {
 	SESSION_SECRET,
 } from '$env/static/private'
 import { prisma } from '$lib/server/prisma'
+import { sequence } from '@sveltejs/kit/hooks'
 
 const authorization: Handle = async ({ event, resolve }) => {
 	// Protect any routes under /authenticated
 	if (event.url.pathname.startsWith('/home')) {
 		const session = await event.locals.getSession()
-		if (!session) {
-			throw redirect(303, '/login')
-		}
+		if (!session) throw redirect(303, '/')
 	}
-	if (event.url.pathname.startsWith('/login')) {
-		const session = await event.locals.getSession()
-		if (session) {
-			throw redirect(303, '/home')
-		}
-	}
+
 	// If the request is still here, just proceed as normally
 	return resolve(event)
 }
 
-export const handle = SvelteKitAuth({
-	adapter: PrismaAdapter(prisma),
-	providers: [
-		// @ts-ignore
-		GitHub({
-			clientId: GITHUB_CLIENT_ID,
-			clientSecret: GITHUB_CLIENT_SECRET,
-		}),
-	],
-	secret: SESSION_SECRET,
-	authorization,
-})
+export const handle = sequence(
+	SvelteKitAuth({
+		adapter: PrismaAdapter(prisma),
+		providers: [
+			// @ts-ignore
+			GitHub({
+				clientId: GITHUB_CLIENT_ID,
+				clientSecret: GITHUB_CLIENT_SECRET,
+			}),
+		],
+		secret: SESSION_SECRET,
+		authorization,
+	})
+)
