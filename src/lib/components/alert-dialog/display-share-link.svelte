@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ClipboardCopy } from 'lucide-svelte'
+	import {toast} from '@zerodevx/svelte-toast'
 	import { PUBLIC_AUTH_CALLBACK_URL } from '$env/static/public'
 	import {
 		AlertDialogAction,
@@ -13,11 +14,13 @@
 
 	import Input from '$lib/ui/input.svelte'
 	import Label from '$lib/ui/label.svelte'
+	import Button from '$lib/ui/button.svelte'
 
 
 	export let id: string
 	$: url = `${PUBLIC_AUTH_CALLBACK_URL}/recommendations/share?userId=${id}`
 	const addToClipboard = () => {
+		toast.push("Link copiado al portapapeles!",)
 		navigator.clipboard.writeText(url)
 	}
 </script>
@@ -33,9 +36,9 @@
 			<div class="flex flex-row items-center space-x-2">
 				<Input type="url" value={url} disabled />
 
-				<AlertDialogAction on:click={addToClipboard} title="Agregar a portapapeles">
+				<Button  variant="ghost" on:click={addToClipboard} title="Agregar a portapapeles">
 					<ClipboardCopy class=" h-[1.2rem] w-[1.2rem] " />
-				</AlertDialogAction>
+				</Button>
 			</div>
 		</div>
 	</AlertDialogHeader>
