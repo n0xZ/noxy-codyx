@@ -1,4 +1,8 @@
 <script lang="ts">
+	import type { Session } from '@auth/core/types'
+	export let userMetadata: Session | null
+		import { signOut } from '@auth/sveltekit/client'
+	import { env } from '$env/dynamic/public'
 	import { Avatar, AvatarFallback, AvatarImage } from '$lib/ui/avatar'
 	import Button from '$lib/ui/button.svelte'
 	import {
@@ -10,8 +14,8 @@
 		SheetTitle,
 		SheetTrigger,
 	} from '$lib/ui/sheet'
-	import type { Session } from '@auth/core/types'
-	export let userMetadata: Session | null
+	const callbackUrl = env.PUBLIC_AUTH_ORIGIN_URL
+	const signOutUser = () => signOut({ redirect: false, callbackUrl })
 	const username = userMetadata?.user?.name
 	const fallbackUsername = username?.slice(0, 2)
 </script>
@@ -39,7 +43,7 @@
 			>
 		</aside>
 		<SheetFooter>
-			<Button>Cerrar sesión</Button>
+			<Button on:click={signOutUser}>Cerrar sesión</Button>
 		</SheetFooter>
 	</SheetContent>
 </Sheet>
