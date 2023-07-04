@@ -38,7 +38,7 @@
 		con Codyx
 	</h1>
 	
-	<a href="/login" data-sveltekit-preload-data="hover" class="px-6 py-4 outline-none bg-rose-500 rounded-lg  text-gray-50" data-sveltekit-preload-data="hover"
+	<a href="/login" class="px-6 py-4 outline-none bg-rose-500 rounded-lg  text-gray-50" data-sveltekit-preload-data="hover"
 		>Comenzar ya</a
 	>
 </section>
