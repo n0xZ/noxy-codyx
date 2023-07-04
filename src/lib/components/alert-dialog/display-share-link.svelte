@@ -18,7 +18,7 @@
 
 
 	export let id: string
-	$: url = `${PUBLIC_AUTH_CALLBACK_URL}/recommendations/share?userId=${id}`
+	$: url = `${PUBLIC_AUTH_CALLBACK_URL}/recommendations/share?id=${id}`
 	const addToClipboard = () => {
 		toast.push("Link copiado al portapapeles!",)
 		navigator.clipboard.writeText(url)
