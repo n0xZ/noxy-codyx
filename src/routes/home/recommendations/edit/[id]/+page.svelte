@@ -60,7 +60,7 @@
 				value={data.form?.note}
 				disabled={loading}
 				placeholder="'Está muy bien este ejemplo. Pero lo miraré más adelante...'"
-				class="px-4 py-3 rounded-lg outline-none bg-light-300 c-gray-800 max-w-4xl"
+			
 			/>
 			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.note}
