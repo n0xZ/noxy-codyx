@@ -10,7 +10,7 @@
 	export let data: LayoutServerData
 </script>
 
-<header class="p-5 w-full">
+<header class="p-5 w-full border-b-2 border-primary/5 sticky top-0 bg-white">
 	<nav
 		class="flex flex-row items-center justify-between container w-full mx-auto max-w-4xl text-base"
 	>
