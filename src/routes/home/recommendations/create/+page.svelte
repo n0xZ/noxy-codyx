@@ -37,7 +37,7 @@
 				type="text"
 				name="name"
 				placeholder="'The Lord of the Rings: The Two Towers'"
-				class="max-w-4xl"
+
 			/>
 			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.name}
@@ -52,6 +52,7 @@
 				name="note"
 				disabled={loading}
 				placeholder="'Está muy bien este ejemplo. Pero lo miraré más adelante...'"
+				class="bg-transparent"
 			/>
 			<span class="h-5 text-xs text-red-500"
 				>{#if form?.containsErrors && form?.fields?.note}
@@ -67,7 +68,7 @@
 				class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 			>
 				{#each actualGenres as genre}
-					<option value={genre}>
+					<option value={genre} class="bg-transparent">
 						{genre}
 					</option>
 				{/each}
