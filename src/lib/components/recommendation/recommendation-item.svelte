@@ -1,87 +1,106 @@
 <script lang="ts">
 	import type { Recommendation } from '@prisma/client'
+	import { FileSignature, FileX2 } from 'lucide-svelte'
+	import {page} from '$app/stores'
 	import { enhance } from '$app/forms'
-	import Edit from '../icons/edit.svelte'
-	import Delete from '../icons/delete.svelte'
+	import {
+		Card,
+		CardContent,
+		CardDescription,
+		CardFooter,
+		CardHeader,
+		CardTitle,
+	} from '$lib/ui/card'
+	import Button from '$lib/ui/button.svelte'
 
 	interface RecommendationWithImage extends Recommendation {
 		img?: any
 	}
-	function handleGenreBackgroundColor (genre: string)  {
-		
+
+ let isPublic = $page.url.pathname.includes("/recommendations/share")
+	console.log(
+isPublic
+	)
+	function handleGenreTextColor(genre: string) {
 		switch (genre) {
 			case 'MANGA':
-				return 'bg-amber-400'
-				break
+				return 'text-amber-400'
+
 			case 'ANIME':
-				return 'bg-sky-400'
-				break
+				return 'text-sky-400'
+
 			case 'MOVIE':
-				return 'bg-emerald-400'
-				break
+				return 'text-emerald-400'
+
 			case 'NOVEL':
-				return 'bg-rose-400'
-				break
+				return 'text-rose-400'
+
 			case 'SERIE':
-				return 'bg-purple-400'
-				break
+				return 'text-purple-400'
+
 			default:
-				return 'bg-gray-400'
-				break
+				return 'text-gray-400'
 		}
 	}
- 
 
-export let recommendation :RecommendationWithImage
-
-const genreBgColor = handleGenreBackgroundColor(recommendation.genre)
-
+	export let recommendation: RecommendationWithImage
 </script>
 
-<article
-		class="flex flex-col justify-center items-center rounded-md    shadow-md bg-light-50  text-center h-auto w-72"
-	>
+<Card class="w-[20rem] ">
+	<CardHeader class="gap-2">
+		<CardTitle tag="h1">
+			<span>{recommendation.name} </span>
+		</CardTitle>
+		<CardTitle tag="h2" class="flex flex-row items-center justify-between text-sm">
+		<span class={handleGenreTextColor(recommendation.genre)}>{recommendation.genre}</span>
+			{#if recommendation.rating}
+		<span>{recommendation.rating}/10</span>
+		{/if}
+			
+		</CardTitle>
+		<CardDescription>
+			{recommendation.note}
+		</CardDescription>
+	</CardHeader>
+	<CardContent>
 		<img
 			src={recommendation.img.src}
 			width="288"
 			height="200"
-			class="rounded-sm aspect-a"
+			class="rounded-sm aspect-auto"
 			alt={`Imagen de ${recommendation.name}`}
 		/>
-		<p class={`    w-full text-lg ${genreBgColor} c-light  font-medium p-1 mb-4 `}>
-			{recommendation.genre}
-		</p>
-		<h2 class="font-semibold text-xl mb-3">{recommendation.name}</h2>
-		<p class=" text-md  c-gray-400">"{recommendation.note}"</p>
-		{#if recommendation.rating}
-			<p class="text-xs c-gray-400">{recommendation.rating}/10</p>
-		{/if}
-		<aside
-			class="flex flex-row justify-center items-center space-x-6 justify-center pb-4 h-full w-full mt-10 c-gray-600"
-		>
+	
+	</CardContent>
+	{#if !isPublic}
+	<CardFooter class="grid gap-2">
+		<Button>
 			<a
 				title="Editar recomendación"
-				href={`/home/recommendations/edit/${recommendation.id}`    }
-				class="flex flex-col justify-center items-center space-y-2"
-				><Edit iconClass="h-6 w-6 hover:c-rose-400 duration-100 ease-in-out" />
+				href={`/home/recommendations/edit/${recommendation.id}`}
+				class="flex flex-row items-center space-x-2"
+				><FileSignature class="h-4 w-4" />
 				<span>Editar</span>
 			</a>
-			<form
-				use:enhance
-				enctype="multipart/form-data"
-				class="flex flex-row items-center "
-				action="/home?/delete-recommendation"
-				method="post"
+		</Button>
+		<form
+			use:enhance
+			enctype="multipart/form-data"
+			class=" w-full"
+			action="/home?/delete-recommendation"
+			method="post"
+		>
+			<input type="hidden" name="id" value={recommendation.id} />
+			<Button
+				type="submit"
+				title="Eliminar recomendación"
+				class="flex flex-row justify-center items-center space-x-1 w-full"
+				variant="destructive"
 			>
-				<input type="hidden" name="id" value={recommendation.id} />
-				<button
-					type="submit"
-					title="Eliminar recomendación"
-					class="flex flex-col justify-center items-center space-y-2"
-				>
-					<Delete iconClass="h-6 w-6 hover:c-rose-400 duration-100 ease-in-out" />
-					<span>Eliminar</span>
-				</button>
-			</form>
-		</aside>
-	</article>
+				<FileX2 class="h-4 w-4" />
+				<span class="text-center">Eliminar</span>
+			</Button>
+		</form>
+	</CardFooter>
+	{ /if}
+</Card>
