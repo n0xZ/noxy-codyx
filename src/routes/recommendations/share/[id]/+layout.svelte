@@ -3,7 +3,13 @@
 
 	export let data: LayoutServerData
 </script>
-
+<svelte:head>
+{#if data.isAuth}
+	<title>Codyx | Preview de mi lista de recomendaciones</title>
+{:else}
+	<title>Bienvenido a Noxy - codyx!</title>
+{/if}
+</svelte:head>
 <header class="p-6">
 	<nav
 		class="flex flex-row items-center justify-between container mx-auto max-w-4xl xl:text-lg text-base"
