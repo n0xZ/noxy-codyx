@@ -31,9 +31,10 @@
 				<Button variant="outline">Compartir lista 📒</Button>
 			</AlertDialogTrigger>
 			{#if data.userMetadata.isContentPublic}
-				<UpdateShareForm />
+					<DisplayShareLink id={data.userMetadata.id} />
 			{:else}
-				<DisplayShareLink id={data.userMetadata.id} />
+			<UpdateShareForm />
+			
 			{/if}
 		</AlertDialog>
 	</div>
