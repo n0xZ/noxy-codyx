@@ -21,7 +21,7 @@ import {signIn} from '@auth/sveltekit/client'
 		</h2>
 
 		<Button
-			class="flex flex-row items-center space-x-2"
+			class="flex flex-row items-center space-x-2 font-bold"
 			on:click={() => signIn('github', { callbackUrl })}
 		>
 			<Github class="h-6 w-6" />
