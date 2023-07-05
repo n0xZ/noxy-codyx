@@ -4,7 +4,18 @@ export const userById = async (id?: string) => {
 	const user = await prisma.user.findUnique({
 		where: { id },
 		select: {
-			recommendations: true,
+			recommendations: {
+				select: {
+					id: true,
+					note: true,
+					status: true,
+					img: { select: { src: true } },
+					name: true,
+					rating: true,
+					genre: true,
+					createdAt: true,
+				},
+			},
 			name: true,
 			image: true,
 			isContentPublic: true,
