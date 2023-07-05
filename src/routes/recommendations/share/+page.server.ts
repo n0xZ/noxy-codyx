@@ -6,7 +6,6 @@ export const load: ServerLoad = async ({ url }) => {
 	const user = await userById(id)
 
 	return {
-		userMetadata: { name: user.name, image: user.image },
-		recommendations: user.recommendations,
+		user,
 	}
 }
