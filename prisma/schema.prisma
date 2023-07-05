@@ -12,7 +12,7 @@ datasource db {
 
 
 model Image{
-  imageId String  @id @default(cuid())
+  imageId String @unique  @id @default(cuid())
   src String
   fileId String @unique
   width Int
