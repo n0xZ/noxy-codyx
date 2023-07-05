@@ -12,12 +12,12 @@ datasource db {
 
 
 model Image{
-  id String @id @default(cuid())
+  imageId String  @id @default(cuid())
   src String
-  fileId String
+  fileId String @unique
   width Int
   height Int
-  recommendation Recommendation @relation(fields: [id], references: [id],onDelete: Cascade, onUpdate: Cascade)
+  recommendation Recommendation @relation(fields: [imageId], references: [id],onDelete: Cascade, onUpdate: Cascade)
    
 }
 
