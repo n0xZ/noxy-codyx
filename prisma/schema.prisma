@@ -6,18 +6,18 @@ generator client {
 }
 
 datasource db {
-  provider = "cockroachdb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 
 model Image{
-  imageId String @unique  @id @default(cuid())
+  imageId String   @id @default(cuid())
   src String
   fileId String @unique
   width Int
   height Int
-  recommendation Recommendation @relation(fields: [imageId], references: [id],onDelete: Cascade, onUpdate: Cascade)
+  recommendation Recommendation @relation(fields: [imageId], references: [recId],onDelete: Cascade, onUpdate: Cascade)
    
 }
 
@@ -62,19 +62,19 @@ model User {
 }
 
 model Recommendation {
-  id        String   @id @unique @default(cuid())
+  recId        String   @id  @default(cuid())
   name      String
   note      String
 img Image?
   createdAt DateTime @default(now())
   genre    Genre
   status Status @default(IN_PROGRESS)
-  author    User     @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  author    User     @relation(fields: [recId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   rating Int?
 
 }
 
-enum Status{
+enum Status {
   IN_PROGRESS
   FINISHED
 }
