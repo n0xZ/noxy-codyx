@@ -11,3 +11,5 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 		isAuth: true,
 	}
 }
+
+export const prerender = true
