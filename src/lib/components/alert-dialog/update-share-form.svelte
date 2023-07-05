@@ -25,10 +25,10 @@
 	<AlertDialogFooter>
 		<AlertDialogCancel>Cancelar</AlertDialogCancel>
 
-		<AlertDialogAction type="button">
-			<form action="?/home" method="post" use:enhance class="w-full">
-				<Button variant="ghost">Aceptar</Button>
-			</form>
-		</AlertDialogAction>
+		<form action="/home?/updateUserContentStatus" method="post" use:enhance class="w-full">
+		
+			<Button type="submit" class="w-full">Aceptar</Button>
+		</form>
 	</AlertDialogFooter>
 </AlertDialogContent>
+
