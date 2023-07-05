@@ -88,7 +88,7 @@
 					name="img"
 					disabled={loading}
 					placeholder="ingresa tu imagen acá"
-					class="px-4 py-3 rounded-lg outline-none  bg-light-300 text-gray-800 max-w-4xl"
+		
 					accept=".jpg, .jpeg, .png, .webp"
 				/>
 				<span class="h-5 text-xs text-red-500"
