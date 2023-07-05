@@ -26,6 +26,7 @@ export const handle: Handle = sequence(
 			GitHub({ clientId: GITHUB_CLIENT_ID, clientSecret: GITHUB_CLIENT_SECRET }),
 		],
 		secret: SESSION_SECRET,
+		trustHost: true,
 	}),
 	authorization
 )
