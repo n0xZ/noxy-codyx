@@ -18,9 +18,7 @@
 	}
 
  let isPublic = $page.url.pathname.includes("/recommendations/share")
-	console.log(
-isPublic
-	)
+
 	function handleGenreTextColor(genre: string) {
 		switch (genre) {
 			case 'MANGA':
