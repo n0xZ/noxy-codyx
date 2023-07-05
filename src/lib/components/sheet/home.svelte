@@ -14,13 +14,15 @@
 		SheetTitle,
 		SheetTrigger,
 	} from '$lib/ui/sheet'
+	import { browser } from '$app/environment'
 	const callbackUrl = env.PUBLIC_AUTH_ORIGIN_URL
 	const signOutUser = () => signOut({ redirect: false, callbackUrl })
 	const username = userMetadata?.user?.name
 	const fallbackUsername = username?.slice(0, 2)
+
 </script>
 
-<Sheet>
+<Sheet >
 	<SheetTrigger>
 		<Avatar>
 			<AvatarImage
@@ -30,7 +32,7 @@
 			<AvatarFallback>{fallbackUsername}</AvatarFallback>
 		</Avatar>
 	</SheetTrigger>
-	<SheetContent position="left" size="sm">
+	<SheetContent position="left" size="content">
 		<SheetHeader>
 			<SheetTitle>Perfil</SheetTitle>
 			<SheetDescription>
