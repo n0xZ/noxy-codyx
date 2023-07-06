@@ -6,7 +6,7 @@ export const recommendationsByAuthor = async (authorEmail: string) => {
 		where: { author: { email: authorEmail } },
 		select: {
 			recId: true,
-
+			id: true,
 			genre: true,
 			img: true,
 			name: true,
