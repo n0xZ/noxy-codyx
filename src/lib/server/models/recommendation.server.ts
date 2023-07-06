@@ -1,11 +1,11 @@
-import type { Image, Genre, Recommendation } from '@prisma/client'
+import type { Genre, Recommendation } from '@prisma/client'
 import { prisma } from '../prisma'
 
 export const recommendationsByAuthor = async (authorEmail: string) => {
 	const recommendations = await prisma.recommendation.findMany({
 		where: { author: { email: authorEmail } },
 		select: {
-			id: true,
+			recId: true,
 
 			genre: true,
 			img: true,
@@ -20,7 +20,6 @@ export const recommendationsByAuthor = async (authorEmail: string) => {
 }
 
 export const createRecommendation = async ({
-	img,
 	name,
 	note,
 	genre,
@@ -28,7 +27,7 @@ export const createRecommendation = async ({
 }: {
 	name: string
 	note: string
-	img: Omit<Image, 'id'>
+
 	genre: Genre
 	authorEmail: string
 }) => {
@@ -38,9 +37,9 @@ export const createRecommendation = async ({
 			note,
 			author: { connect: { email: authorEmail } },
 			genre,
-			img: { create: img },
 		},
 	})
+
 	return createdRecommendation
 }
 

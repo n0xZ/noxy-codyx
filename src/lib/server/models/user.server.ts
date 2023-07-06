@@ -6,7 +6,7 @@ export const userById = async (id?: string) => {
 		select: {
 			recommendations: {
 				select: {
-					id: true,
+					recId: true,
 					note: true,
 					status: true,
 					img: { select: { src: true } },

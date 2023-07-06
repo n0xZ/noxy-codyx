@@ -13,7 +13,7 @@ export const load: ServerLoad = async ({ locals }) => {
 
 			recommendations: {
 				select: {
-					id: true,
+					recId: true,
 					genre: true,
 					img: true,
 					name: true,
@@ -28,6 +28,7 @@ export const load: ServerLoad = async ({ locals }) => {
 	})
 
 	if (!user) throw error(404, 'User not found')
+
 	return {
 		reccos: user.recommendations,
 		userMetadata: { id: user.id, isContentPublic: user.isContentPublic },
@@ -40,9 +41,9 @@ export const actions: Actions = {
 		const id = formData.get('id') as string
 		const recc = await prisma.recommendation.findUnique({
 			where: { id },
-			select: { id: true, img: { select: { fileId: true } } },
+			select: { recId: true, img: { select: { fileId: true } } },
 		})
-		await deleteRecommendation(recc?.id ?? '')
+		await deleteRecommendation(recc?.recId ?? '')
 		await imageKit.deleteFile(recc?.img?.fileId ?? '')
 	},
 	updateUserContentStatus: async ({ locals }) => {
