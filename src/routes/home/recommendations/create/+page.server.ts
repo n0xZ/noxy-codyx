@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { fail, redirect } from '@sveltejs/kit'
 import { imageKit } from '$lib/server/imagekit'
 import { createRecommendation } from '$lib/server/models/recommendation.server'
+import { createImage } from '$lib/server/models/image.server'
 
 const createRecommendationSchema = z.object({
 	name: z.string().min(3, { message: 'Campo requerido' }),
@@ -29,26 +30,31 @@ export const actions: Actions = {
 			const arrayBuffer = await img.arrayBuffer()
 			const buffer = Buffer.from(arrayBuffer)
 			const session = await locals.getSession()
-			const result = await imageKit.upload({
-				file: buffer,
-				fileName: formData.data.img.name,
-				tags: ['recommendation'],
-			})
-			result.fileId
+
 			const newRecomm = await createRecommendation({
 				name,
 				note,
 				authorEmail: session?.user?.email ?? '',
 				genre,
-				img: {
-					src: result.url,
-					width: result.width,
-					height: result.height,
-					fileId: result.fileId,
-				},
 			})
 			if (!newRecomm) {
 				return fail(500, { message: 'Error al crear la recomendación' })
+			}
+			const { fileId, url, height, width } = await imageKit.upload({
+				file: buffer,
+				fileName: formData.data.img.name,
+				tags: ['recommendation'],
+			})
+			const createImaged = await createImage({
+				src: url,
+				fileId,
+				height,
+				width,
+				recId: newRecomm.id,
+			})
+
+			if (!createImaged) {
+				return fail(500, { message: 'Error al guardar la imagen.' })
 			}
 			throw redirect(302, '/home')
 		} else {
