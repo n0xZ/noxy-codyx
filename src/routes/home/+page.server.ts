@@ -3,6 +3,7 @@ import type { Actions } from './$types'
 import { deleteRecommendation } from '$lib/server/models/recommendation.server'
 import { imageKit } from '$lib/server/imagekit'
 import { prisma } from '../../lib/server/prisma'
+import { deleteImage } from '$lib/server/models/image.server'
 
 export const load: ServerLoad = async ({ locals }) => {
 	const session = await locals.getSession()
@@ -14,6 +15,7 @@ export const load: ServerLoad = async ({ locals }) => {
 			recommendations: {
 				select: {
 					recId: true,
+					id: true,
 					genre: true,
 					img: true,
 					name: true,
@@ -28,7 +30,7 @@ export const load: ServerLoad = async ({ locals }) => {
 	})
 
 	if (!user) throw error(404, 'User not found')
-
+	console.log(user)
 	return {
 		reccos: user.recommendations,
 		userMetadata: { id: user.id, isContentPublic: user.isContentPublic },
@@ -41,10 +43,17 @@ export const actions: Actions = {
 		const id = formData.get('id') as string
 		const recc = await prisma.recommendation.findUnique({
 			where: { id },
-			select: { recId: true, img: { select: { fileId: true } } },
+			select: {
+				id: true,
+				recId: true,
+				img: { select: { fileId: true, id: true } },
+			},
 		})
-		await deleteRecommendation(recc?.recId ?? '')
-		await imageKit.deleteFile(recc?.img?.fileId ?? '')
+
+		Promise.race([
+			await deleteRecommendation(recc?.id ?? ''),
+			await imageKit.deleteFile(recc?.img?.fileId ?? ''),
+		])
 	},
 	updateUserContentStatus: async ({ locals }) => {
 		const session = await locals.getSession()
