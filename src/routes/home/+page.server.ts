@@ -3,7 +3,6 @@ import type { Actions } from './$types'
 import { deleteRecommendation } from '$lib/server/models/recommendation.server'
 import { imageKit } from '$lib/server/imagekit'
 import { prisma } from '../../lib/server/prisma'
-import { deleteImage } from '$lib/server/models/image.server'
 
 export const load: ServerLoad = async ({ locals }) => {
 	const session = await locals.getSession()
