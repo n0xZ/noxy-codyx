@@ -8,16 +8,18 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+
 }
 
 
 model Image{
-  imageId String   @id @default(cuid())
+  id String   @id @default(cuid())
   src String
   fileId String @unique
   width Int
   height Int
-  recommendation Recommendation @relation(fields: [imageId], references: [recId],onDelete: Cascade, onUpdate: Cascade)
+  imageId String @unique
+  recommendation Recommendation @relation(fields: [imageId], references: [id],onDelete: Cascade, onUpdate: Cascade)
    
 }
 
@@ -62,13 +64,14 @@ model User {
 }
 
 model Recommendation {
-  recId        String   @id  @default(cuid())
+  id        String   @id  @default(cuid())
   name      String
   note      String
 img Image?
   createdAt DateTime @default(now())
   genre    Genre
   status Status @default(IN_PROGRESS)
+  recId String 
   author    User     @relation(fields: [recId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   rating Int?
 
