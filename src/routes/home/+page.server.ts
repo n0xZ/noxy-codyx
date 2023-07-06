@@ -30,7 +30,7 @@ export const load: ServerLoad = async ({ locals }) => {
 	})
 
 	if (!user) throw error(404, 'User not found')
-	console.log(user)
+
 	return {
 		reccos: user.recommendations,
 		userMetadata: { id: user.id, isContentPublic: user.isContentPublic },
