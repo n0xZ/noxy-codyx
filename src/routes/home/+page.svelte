@@ -24,7 +24,7 @@
 
 <aside class="p-5 border-b-2 border-primary/10">
 	<div
-		class="container mx-auto max-w-4xl flex items-center justify-end flex-row"
+		class="container mx-auto max-w-5xl flex items-center justify-end flex-row"
 	>
 		<AlertDialog>
 			<AlertDialogTrigger>
@@ -44,7 +44,7 @@
 </h2>
 {#if data.reccos.length !== 0}
 	<section
-		class="h-full container mx-auto max-w-4xl grid xl:grid-cols-3 grid-cols-1 grid-rows-2 gap-5 place-items-center mt-9 "
+		class="h-full container mx-auto max-w-5xl grid xl:grid-cols-3 grid-cols-1  gap-2 place-items-center mt-9 mb-6 "
 	>
 		<RecommendationList props={{ reccos: data.reccos }} />
 	</section>

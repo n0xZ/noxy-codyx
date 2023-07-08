@@ -8,7 +8,7 @@
 </svelte:head>
 <header class="p-6 ">
 	<nav
-		class="flex flex-row items-center justify-between container mx-auto max-w-4xl xl:text-lg text-base    "
+		class="flex flex-row items-center justify-between container mx-auto max-w-5xl xl:text-lg text-base    "
 	>
 		<h1>
 			<a
@@ -31,7 +31,7 @@
 	</nav>
 </header>
 <section
-	class="min-h-screen h-full flex flex-col justify-center items-center space-y-5  max-w-4xl container mx-auto"
+	class="min-h-screen h-full flex flex-col justify-center items-center space-y-5  max-w-5xl container mx-auto"
 >
 	<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-center">
 		Imposible olvidar tu <span class="text-rose-500 ">lista de recomendaciones</span>

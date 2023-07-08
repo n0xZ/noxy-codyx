@@ -12,7 +12,7 @@
 </svelte:head>
 <header class="p-6">
 	<nav
-		class="flex flex-row items-center justify-between container mx-auto max-w-4xl xl:text-lg text-base"
+		class="flex flex-row items-center justify-between container mx-auto max-w-5xl xl:text-lg text-base"
 	>
 		<h1>
 			<a

@@ -27,7 +27,7 @@
 
 <svelte:head><title>Codyx - Editar recomendación existente</title></svelte:head>
 
-<section class="container w-full h-screen max-w-4xl mx-auto mt-5">
+<section class="container w-full h-screen max-w-5xl mx-auto mt-5">
 	<form
 		action={`/home/recommendations/edit/${id}?/edit-recommendation`}
 		enctype="multipart/form-data"
@@ -36,7 +36,7 @@
 		class="container  h-screen   flex flex-col justify-center space-y-3 w-full"
 	>
 		<h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-center mb-3">Editar recomendación</h2>
-		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
+		<aside class="flex flex-col justify-center space-y-3 max-w-5xl">
 			<Label for="name" >Nombre de la recomendación</Label>
 			<Input
 				type="text"
@@ -52,7 +52,7 @@
 				{/if}</span
 			>
 		</aside>
-		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
+		<aside class="flex flex-col justify-center space-y-3 max-w-5xl">
 			<Label for="note" >Nota de la recomendación</Label>
 			<Input
 				type="text"
@@ -68,7 +68,7 @@
 				{/if}</span
 			>
 		</aside>
-		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
+		<aside class="flex flex-col justify-center space-y-3 max-w-5xl">
 			<Label for="genre" >Género de la recomendación</Label>
 			<select
 				name="genre"
@@ -88,7 +88,7 @@ class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 t
 				{/if}</span
 			>
 		</aside>
-		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
+		<aside class="flex flex-col justify-center space-y-3 max-w-5xl">
 			<Label for="rating" 
 				>Puntaje de la recomendación (del 1 al 10)</Label
 			>
@@ -108,7 +108,7 @@ class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 
 		</aside>
 
 
-			<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
+			<aside class="flex flex-col justify-center space-y-3 max-w-5xl">
 				<Label for="status" 
 					>Estado actual de la recomendación
 				</Label>
@@ -134,7 +134,7 @@ class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 
 		
 			
 
-		<aside class="flex flex-col justify-center space-y-3 max-w-4xl">
+		<aside class="flex flex-col justify-center space-y-3 max-w-5xl">
 				<Label for="img" 
 					>Imagen/Preview de la recomendación</Label
 				>
