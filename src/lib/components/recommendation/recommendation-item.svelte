@@ -44,7 +44,7 @@
 	export let recommendation: RecommendationWithImage
 </script>
 
-<Card class="w-[20rem] ">
+<Card class="w-[20rem]  gap-4">
 	<CardHeader class="gap-2">
 		<CardTitle tag="h1">
 			<span>{recommendation.name} </span>
@@ -56,7 +56,7 @@
 		{/if}
 			
 		</CardTitle>
-		<CardDescription>
+		<CardDescription class="line-clamp-3">
 			{recommendation.note}
 		</CardDescription>
 	</CardHeader>
