@@ -44,10 +44,10 @@
 	export let recommendation: RecommendationWithImage
 </script>
 
-<Card class="w-[20rem]  gap-4">
+<Card class="w-[19rem]  h-[48rem] gap-4 flex flex-col justify-around -space-y-7">
 	<CardHeader class="gap-2">
-		<CardTitle tag="h1">
-			<span>{recommendation.name} </span>
+		<CardTitle tag="h1"  class="line-clamp-1">
+		{recommendation.name}
 		</CardTitle>
 		<CardTitle tag="h2" class="flex flex-row items-center justify-between text-sm">
 		<span class={handleGenreTextColor(recommendation.genre)}>{recommendation.genre}</span>
@@ -60,12 +60,12 @@
 			{recommendation.note}
 		</CardDescription>
 	</CardHeader>
-	<CardContent>
+	<CardContent >
 		<img
 			src={recommendation.img.src}
 			width="288"
 			height="200"
-			class="rounded-sm aspect-auto"
+			class=" rounded-md aspect-auto" 
 			alt={`Imagen de ${recommendation.name}`}
 		/>
 	
