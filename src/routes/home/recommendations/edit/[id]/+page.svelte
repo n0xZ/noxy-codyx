@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SubmitFunction } from '@sveltejs/kit'
-	import { Status } from '@prisma/client'
+	import type{ Status } from '@prisma/client'
 	import { enhance } from '$app/forms'
 	import {page } from '$app/stores'
  import Spinner from '$lib/components/icons/spinner.svelte'
