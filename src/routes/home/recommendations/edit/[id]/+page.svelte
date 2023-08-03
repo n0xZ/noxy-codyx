@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SubmitFunction } from '@sveltejs/kit'
-	import type{ Status } from '@prisma/client'
+
 	import { enhance } from '$app/forms'
 	import {page } from '$app/stores'
  import Spinner from '$lib/components/icons/spinner.svelte'
@@ -10,7 +10,7 @@
 	import type { ActionData, PageServerData } from './$types'
 
 	const actualGenres =["MOVIE" , "SERIE" , "ANIME" , "MANGA" , "NOVEL" , "OTHER"]
-	const actualStatus = Object.keys(Status)
+	const actualStatus = ["IN PROGRESS","FINISHED"]
 	let loading = false
 	const id = $page.params.id
 	export let form: ActionData
