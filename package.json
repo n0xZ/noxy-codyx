@@ -48,7 +48,7 @@
     "clsx": "^1.2.1",
     "domain-functions": "^1.8.0",
     "dotenv": "^16.4.5",
-    "imagekit": "^4.1.4",
+    "imagekit": "^5.0.0",
     "lucide-svelte": "^0.257.0",
     "prisma": "^5.15.0",
     "radix-svelte": "^0.8.0",
