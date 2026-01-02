@@ -46,7 +46,7 @@
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.6.1",
     "clsx": "^1.2.1",
-    "domain-functions": "^1.8.0",
+    "domain-functions": "^3.0.0",
     "dotenv": "^16.4.5",
     "imagekit": "^4.1.4",
     "lucide-svelte": "^0.257.0",
